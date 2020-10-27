@@ -1,0 +1,3 @@
+FLASK_ENV=development
+FLASK_APP=mjkeji
+FLASK_RUN_PORT=5000
