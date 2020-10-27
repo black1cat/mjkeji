@@ -5,4 +5,8 @@ class User(db.Model):
   name = db.Column(db.String(20))
   username = db.Column(db.String(20))
   password_hash = db.Column(db.String(128))
-  
+class Message(db.Model):
+  id = db.Column(db.Integer,primary_key=True)
+  name = db.Column(db.String(20))
+  email = db.Column(db.String(128))
+  message = db.Column(db.String(428))
