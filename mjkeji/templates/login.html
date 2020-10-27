@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>登陆页面</title>
+    <link rel="stylesheet" href="static/vendor/bootstrap/css/bootstrap.css">
+    <script src="static/vendor/jquery/jquery-3.4.1.min.js"></script>
+    <script src="static/vendor/bootstrap/js/bootstrap.js"></script>
+    
+
+
+</head>
+<body style="background: url('static/assets/images/simple-post.jpg') no-repeat;background-size: 100% 100%">
+    <div class="col-md-12 row" style="margin-top: 150px;margin-bottom: 150px">
+        <div class="col-md-7"></div>
+        <div class="col-md-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    欢迎登录
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" method ="POST" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">用户名：</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="username"
+                                       placeholder="请输入用户名">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">密码：</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="userpwd"
+                                       placeholder="请输入密码">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">验证码：</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="usercheckcode"
+                                       placeholder="请输入验证码">
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> 请记住我 </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+    
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-footer clearfix">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <button class="btn btn-info" id="loginBtn">登录</button>
+                        <button class="btn btn-link" id="gotoRegister">去注册</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    
+    </div>
+</body>
+</html>
