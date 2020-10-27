@@ -5,4 +5,4 @@ class User(db.Model):
   name = db.Column(db.String(20))
   username = db.Column(db.String(20))
   password_hash = db.Column(db.String(128))
-  print("test")
+  
