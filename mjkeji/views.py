@@ -26,3 +26,9 @@ def simple_page():
 @app.route('/shortcodes',methods=['GET','POST'])
 def shortcodes():
     return render_template('shortcodes.html')
+@app.route('/temperature',methods=['GET','POST'])
+def temperature():
+    return render_template('temperature.html')
+@app.route('/noise',methods=['GET','POST'])
+def noise():
+    return render_template('noise.html')

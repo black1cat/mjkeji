@@ -54,17 +54,21 @@
                 </form>
               </div>
               <ul class="nav nav-pills">
-                <li role="presentation" class="active"><a href="index">机器温度</a></li>
-                <li role="presentation"><a href="temperature">环境状况</a></li>
+                <li role="presentation"><a href="index">机器温度</a></li>
+                <li role="presentation" class='active'><a href="temperature">环境状况</a></li>
                 <li role="presentation"><a href="noise">噪声情况</a></li>
               </ul>
               <section class="left-image">
                 <div class="container-fluid">
                   <div class="row">
                     <div class="col-md-6">
-                      <div id="temperature" style="width: 900px;height:700px;">sadasd</div>
+                      <div id="temperature" style="width: 500px;height:450px;">sadasd</div>
                     </div>
-                
+                    <div class="col-md-6">
+                      <div class="right-content">
+                        <div id="humidity" style="width: 500px;height:450px;">dasdasdas</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </section>
@@ -139,8 +143,30 @@
       data: [5, 20, 36, 10, 10, 20,24,3,56]
     }]
   };
+  var jq_temperature = echarts.init(document.getElementById('humidity'));
+
+// 指定图表的配置项和数据
+var option2 = {
+  title: {
+      text: '湿度'
+    },
+    tooltip: {},
+    legend: {
+      data:['湿度']
+    },
+    xAxis: {
+      data: ["0时","3时","6时","9时","12时","15时","18时","21时","24时"]
+    },
+    yAxis: {},
+    series: [{
+      name: '湿度',
+      type: 'line',
+      data: [5, 20, 36, 10, 10, 20,34,35,23]
+    }]
+  };
+
   // 使用刚指定的配置项和数据显示图表。
   myChart.setOption(option1);
- 
+  jq_temperature.setOption(option2);
 
 </script>

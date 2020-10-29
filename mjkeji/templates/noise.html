@@ -54,9 +54,9 @@
                 </form>
               </div>
               <ul class="nav nav-pills">
-                <li role="presentation" class="active"><a href="index">机器温度</a></li>
+                <li role="presentation"><a href="index">机器温度</a></li>
                 <li role="presentation"><a href="temperature">环境状况</a></li>
-                <li role="presentation"><a href="noise">噪声情况</a></li>
+                <li role="presentation" class="active"><a href="noise">噪声情况</a></li>
               </ul>
               <section class="left-image">
                 <div class="container-fluid">
@@ -123,18 +123,18 @@
   // 指定图表的配置项和数据
   var option1 = {
     title: {
-      text: '温度'
+      text: '频率'
     },
     tooltip: {},
     legend: {
-      data:['温度']
+      data:['频率']
     },
     xAxis: {
       data: ["0时","3时","6时","9时","12时","15时","18时","21时","24时"]
     },
     yAxis: {},
     series: [{
-      name: '温度',
+      name: '频率',
       type: 'line',
       data: [5, 20, 36, 10, 10, 20,24,3,56]
     }]
