@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    {% block head %}
+    {% endblock %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+
+    <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--    引入echars图表-->
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="static/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="static/assets/css/templatemo-style.css">
+    <link rel="stylesheet" href="static/assets/css/owl.css">
+
+  </head>
+
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+      <!-- Main -->
+        <div id="main">
+          <div class="inner">
+
+            <!-- Header -->
+            <header id="header">
+              <div class="logo">
+                <a href="index">山东明佳科技有限公司</a>
+              </div>
+            </header>
+
+          {% block content %}
+            
+          {% endblock %}
+            <!-- Right Image -->
+
+
+          </div>
+        </div>
+
+      <!-- Sidebar -->
+        <div id="sidebar">
+
+          <div class="inner">
+
+            <!-- Search Box -->
+             
+            <section id="search" class="alt">
+              <form method="get" action="#">
+                <input type="text" name="search" id="search" placeholder="Search..." />
+              </form>
+            </section>
+            <!-- Menu -->
+            <nav id="menu">
+              <ul>
+                <li><a href="index">数据采集</a></li>
+                <li><a href="simple_page">异常检测</a></li>
+                <li><a href="shortcodes">数据展示</a></li>
+                <li>
+                  <span class="opener">系统管理</span>
+                  <ul>
+                    <li><a href="#">人员管理</a></li>
+                    <li><a href="#">厂房管理</a></li>
+                    <li><a href="#">设置</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+
+
+          </div>
+        </div>
+
+    </div>
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+    <script src="static/vendor/jquery/jquery.min.js"></script>
+    <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="static/assets/js/browser.min.js"></script>
+    <script src="static/assets/js/breakpoints.min.js"></script>
+    <script src="static/assets/js/transition.js"></script>
+    <script src="static/assets/js/owl-carousel.js"></script>
+    <script src="static/assets/js/custom.js"></script>
+    {% block mapscript %}
+    {% endblock %}
+</body>
+{% block script %}
+            
+{% endblock %}
