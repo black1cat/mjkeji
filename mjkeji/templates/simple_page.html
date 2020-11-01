@@ -2,6 +2,31 @@
     {% block head%}
     <style type="text/css">
       #dituContent {width:697px;height:550px;border:#ccc solid 1px;}
+      .messageWrap{
+      bottom:0;
+      width:100%;
+      padding:0 0.2rem;
+      overflow:hidden;
+      }
+      .message{
+        width:100%;
+        background:#fff;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        height:100%;
+        overflow:hidden;
+        padding-left:0.2rem;
+      }
+      .message li{
+        line-height:2rem;
+        list-style-type:none;
+        list-style-image: url(static/assets/images/tanhao.png);
+        padding-top: 0;
+        margin-bottom: 2px;
+        
+      }
+      
+      #notice span{float:right}
     </style>
     {% endblock  %}
 
@@ -31,33 +56,28 @@
                   </section>
                   <!-- Contact Form -->
                   <section class="contact-form">
+                    
                     <div class="container-fluid">
+                      
                       <div class="row">
-                        <div class="col-md-6">
-                          <form id="contact" action="" method="post">
-                            <div class="row">
-                              <div class="col-md-12">
-                                <fieldset>
-                                  <input name="name" type="text" class="form-control" id="name" placeholder="Your name..." required="">
-                                </fieldset>
-                              </div>
-                              <div class="col-md-12">
-                                <fieldset>
-                                  <input name="email" type="text" class="form-control" id="email" placeholder="Your email..." required="">
-                                </fieldset>
-                              </div>
-                              <div class="col-md-12">
-                                <fieldset>
-                                  <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your message..." required=""></textarea>
-                                </fieldset>
-                              </div>
-                              <div class="col-md-12">
-                                <fieldset>
-                                  <input type="submit" class="button" id="form-submit" name="message" value="提交"</input>
-                                </fieldset>
-                              </div>
+                        
+                        <div class="col-md-6" id="roll">
+                          <div class="messageWrap borderBox">
+                            <div class="message borderBox">
+                                <ul id="notice">
+                                  <li><a href="#">一号生产线检测点一温度警告</a><span>2020-10-31</span></li>
+                                  <li><a href="#">一号生产线检测点二湿度警告</a><span>2020-10-31</span></li>
+                                  <li><a href="#">一号生产线检测点三震动噪声警告</a><span>2020-10-31</span></li>
+                                  <li><a href="#">一号生产线检测点一松弛度警告</a><span>2020-10-31</span></li>
+                                  <li><a href="#">一号生产线检测点一皮带涨紧警告</a><span>2020-10-31</span></li>
+                                  <li><a href="#">一号生产线检测点一温度警告</a><span>2020-10-31</span></li>
+                                  <li><a href="#">一号生产线检测点一温度警告</a><span>2020-10-31</span></li>
+                                  <li><a href="#">一号生产线检测点一温度警告</a><span>2020-10-31</span></li>
+                                  <li><a href="#">一号生产线检测点一温度警告</a><span>2020-10-31</span></li>
+                                </ul>
                             </div>
-                          </form> 
+                          </div>
+                            <!--  慕课网课程公告结束 -->  
                         </div>
                         <div class="col-md-6">
                           <div id="map">
@@ -81,4 +101,5 @@
     {% block mapscript %}
     <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=1lXrSsIRvQ10kSUTf9d84CzEvHwnY1F1"></script>
     <script type="text/javascript" src="static/assets/js/map.js"></script>
+    <script type="text/javascript" src="static/assets/js/roll.js"></script>
     {% endblock %}

@@ -27,49 +27,33 @@ function addMapControl(){
                   }
 
 //标注点数组
-var markerArr = [{title:'<a href="http://127.0.0.1:5000/index">A</a>',content:"我的备注",point:"117.002652|36.184504",isOpen:0,icon:{w:23,h:25,l:0,t:21,x:9,lb:12}}
+var markerArr = [{title:'<a href="http://127.0.0.1:5000/index">A</a>',content:"厂区A",point:"117.002652|36.184504",isOpen:0,icon:{w:23,h:25,l:0,t:21,x:9,lb:12}}
 ];
 //创建marker
 function addMarker(){
-  for(var i=0;i<markerArr.length;i++){
-      var json = markerArr[i];
-      var p0 = json.point.split("|")[0];
-      var p1 = json.point.split("|")[1];
-      var point = new BMap.Point(p0,p1);
-var iconImg = createIcon(json.icon);
-      var marker = new BMap.Marker(point,{icon:iconImg});
-var iw = createInfoWindow(i);
-var label = new BMap.Label(json.title,{"offset":new BMap.Size(json.icon.lb-json.icon.x+10,-20)});
-marker.setLabel(label);
-      map.addOverlay(marker);
-      label.setStyle({
-                  borderColor:"#808080",
-                  color:"#333",
-                  cursor:"pointer"
-      });
-
-(function(){
-  var index = i;
-  var _iw = createInfoWindow(i);
-  var _marker = marker;
-  _marker.addEventListener("click",function(){
-      this.openInfoWindow(_iw);
-    });
-    _iw.addEventListener("open",function(){
-      _marker.getLabel().hide();
-    })
-    _iw.addEventListener("close",function(){
-      _marker.getLabel().show();
-    })
-  label.addEventListener("click",function(){
-      _marker.openInfoWindow(_iw);
-    })
-  if(!!json.isOpen){
-    label.hide();
-    _marker.openInfoWindow(_iw);
-  }
-})()
-  }
+  var points = [
+    [117.002688,36.184621],
+    //[116.323938,39.989919], 
+];
+for( var i = 0;i < points.length; i++){
+  var myIcon = new BMap.Icon("static/assets/images/icon_greenmarker.png", new BMap.Size(25, 40), {
+      // 指定定位位置
+      offset: new BMap.Size(10, 25),
+      // 当需要从一幅较大的图片中截取某部分作为标注图标时，需要指定大图的偏移位置   
+      //imageOffset: new BMap.Size(0, 0 - i * 25) // 设置图片偏移  
+  });
+  var point = new BMap.Point(points[i][0],points[i][1]);
+  // 创建标注对象并添加到地图 
+  var marker = new BMap.Marker(point,{icon: myIcon});
+  map.addOverlay(marker);
+  var label = new BMap.Label("<a href='http://127.0.0.1:5000/simple_page'>工厂A</a>",{"offset":new BMap.Size(25,20)});
+  marker.setLabel(label);
+  label.setStyle({
+    borderColor:"#808080",
+    color:"#333",
+    cursor:"pointer"
+});
+};
 }
 //创建InfoWindow
 function createInfoWindow(i){
@@ -78,10 +62,6 @@ function createInfoWindow(i){
   return iw;
 }
 //创建一个Icon
-function createIcon(json){
- // var icon = new BMap.Icon("http://api.map.baidu.com/lbsapi/creatmap/images/us_mk_icon.png ", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
- var icon = new BMap.Icon('/static/assets/images/icon_greenmarker.png', new BMap.Size(12,12))
- return icon;
-}
+
 
 initMap();//创建和初始化地图
