@@ -2,16 +2,18 @@
 <html lang="en">
 
   <head>
-    {% block head %}
-    {% endblock %}
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
-
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet"> -->
+    <script src="static/vendor/jquery/jquery.min.js"></script>
     <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="static/assets/css/base_page.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static',filename='vendor/bootstrap-table/bootstrap-table.css')}}">
+    <script src="{{url_for('static',filename='vendor/bootstrap-table/bootstrap-table.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/bootstrap-table/locale/bootstrap-table-zh-CN.js')}}"></script>
     <!--    引入echars图表-->
     <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
 
@@ -19,7 +21,8 @@
     <link rel="stylesheet" href="static/assets/css/fontawesome.css">
     <link rel="stylesheet" href="static/assets/css/templatemo-style.css">
     <link rel="stylesheet" href="static/assets/css/owl.css">
-
+    {% block head %}
+    {% endblock %}
   </head>
 
 <body class="is-preload">
@@ -34,7 +37,6 @@
             <!-- Header -->
             <header id="header">
               <div class="logo">
-                <a href="index">山东明佳科技有限公司</a>
               </div>
             </header>
 
@@ -55,9 +57,12 @@
             <!-- Search Box -->
              
             <section id="search" class="alt">
-              <form method="get" action="#">
+              <!-- <form method="get" action="#">
                 <input type="text" name="search" id="search" placeholder="Search..." />
-              </form>
+              </form> -->
+                <div class="logo">
+                  山东明佳科技有限公司
+                </div>
             </section>
             <!-- Menu -->
             <nav id="menu">
@@ -66,11 +71,12 @@
                 <li><a href="simple_page">异常检测</a></li>
                 <li><a href="shortcodes">数据展示</a></li>
                 <li>
-                  <span class="opener">系统管理</span>
+                  <span class="opener">系统设置</span>
                   <ul>
-                    <li><a href="#">人员管理</a></li>
-                    <li><a href="#">厂房管理</a></li>
-                    <li><a href="#">设置</a></li>
+                    <li><a href="plant_settings">厂区设置</a></li>
+                    <li><a href="production_line_settings">生产线设置</a></li>
+                    <li><a href="device_settings">设备设置</a></li>
+                    <li><a href="database">数据仓库</a></li>
                   </ul>
                 </li>
               </ul>
@@ -84,7 +90,7 @@
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-    <script src="static/vendor/jquery/jquery.min.js"></script>
+    
     <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <script src="static/assets/js/browser.min.js"></script>
@@ -96,5 +102,6 @@
     {% endblock %}
 </body>
 {% block script %}
-            
+ 
+
 {% endblock %}

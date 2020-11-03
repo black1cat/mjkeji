@@ -928,21 +928,21 @@ section.buttons .container-fluid {
     -webkit-transition: margin-left 0.5s ease, box-shadow 0.5s ease;
     -ms-transition: margin-left 0.5s ease, box-shadow 0.5s ease;
     transition: margin-left 0.5s ease, box-shadow 0.5s ease;
-    background-color: #24252d;
+    background-color: #305680;
     position: relative;
-    width: 420px;
+    width: 1000px;
 }
 
 #sidebar > .inner {
     position: relative;
-    width: 420px;
+    width: 280px;
     padding: 0px 50px;
 }
 
 #sidebar > .inner > #search  {
-    background-color: #2d2e39;
+    background-color: #305680;
     height: 100px;
-    width: 420px;
+    width: 280px;
     display: inline-block;
     margin-left: -50px;
 }
@@ -952,7 +952,7 @@ section.buttons .container-fluid {
 	background-color: transparent;
 	border: none;
 	padding: 0px 50px;
-	color: #fff;
+	color:black;
 }
 
 #search form:before {
@@ -1006,7 +1006,7 @@ section.buttons .container-fluid {
 
 #sidebar .toggle:before {
     content: '\f0c9';
-    font-size: 2rem;
+    font-size: 8rem;
     height: inherit;
     left: 0;
     line-height: inherit;
@@ -1022,25 +1022,25 @@ section.buttons .container-fluid {
 
 @media screen and (max-width: 1680px) {
     #sidebar {
-        width: 380px;
+        width: 280px;
     }
     #sidebar > .inner {
         padding: 0px 30px;
-        width: 380px;
+        width: 280px;
     }
     #sidebar .toggle {
         height: 100px;
-        left: 380px;
+        left: 280px;
         line-height: 100px;
     }
     #sidebar .toggle:before {
         font-size: 24px;
     }
     #sidebar.inactive {
-        margin-left: -380px;
+        margin-left: -280px;
     }
     #sidebar > .inner > #search  {
-	    width: 380px;
+	    width: 280px;
 	    margin-left: -30px;
 	}
 	#menu {
@@ -1215,7 +1215,7 @@ section.buttons .container-fluid {
     line-height: 100px;
 }
 #header .logo a {
-	font-size: 36px;
+	font-size: 27px;
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	color: #fff;
@@ -1264,8 +1264,8 @@ section.buttons .container-fluid {
     border-bottom: 0;
     cursor: pointer;
     display: block;
-    font-size: 15px;
-    font-weight: 300;
+    font-size: 17px;
+    font-weight:300;
     padding: 15px 0px;
 }
 #menu ul li ul a,
@@ -1344,7 +1344,7 @@ section.buttons .container-fluid {
 
 #menu > ul > li > ul a,
 #menu > ul > li > ul span {
-    font-size: 13px;
+    font-size: 16px;
 }
 
 #menu > ul > li > ul > li {

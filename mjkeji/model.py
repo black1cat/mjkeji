@@ -49,3 +49,10 @@ class Chain(db.Model):
   time = db.Column(db.DateTime)
   p_id = db.Column(db.Integer)
   tension = db.Column(db.Boolean)
+class Factory_area(db.Model):
+  id = db.Column(db.Integer,primary_key=True)
+  name = db.Column(db.String(128))
+class Device(db.Model):
+  id = db.Column(db.Integer,primary_key=True)
+  name = db.Column(db.String(128))
+  status = db.Column(db.String(128)) # 设备状态
