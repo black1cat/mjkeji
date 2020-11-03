@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
     {% block head%}
     <style type="text/css">
-      #dituContent {width:697px;height:550px;border:#ccc solid 1px;}
+      #dituContent {width:550px;height:550px;border:#ccc solid 1px;float: left;}
+      #roll{float:right}
       .messageWrap{
       bottom:0;
       width:100%;
@@ -11,8 +12,8 @@
       .message{
         width:100%;
         background:#fff;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
         height:100%;
         overflow:hidden;
         padding-left:0.2rem;
@@ -20,7 +21,7 @@
       .message li{
         line-height:2rem;
         list-style-type:none;
-        list-style-image: url(static/assets/images/tanhao.png);
+        list-style-image: url(static/assets/images/tanhao.png); 
         padding-top: 0;
         margin-bottom: 2px;
         
@@ -47,6 +48,33 @@
                       <div class="row">
                         <div class="col-md-12" >
                           <div  id="dituContent"></div>
+                          <div class="col-md-4" id="roll">
+                            <div class="messageWrap borderBox">
+                              <div class="message borderBox">
+                                  <ul id="notice">
+                                    <li><a href="#">检测点一温度警告</a><span>2020-10-31</span></li>
+                                    <li><a href="#">检测点二湿度警告</a><span>2020-10-31</span></li>
+                                    <li><a href="#">检测点三震动噪声警告</a><span>2020-10-31</span></li>
+                                    <li><a href="#">检测点一松弛度警告</a><span>2020-10-31</span></li>
+                                    <li><a href="#">检测点一皮带涨紧警告</a><span>2020-10-31</span></li>
+                                    <li><a href="#">检测点一温度警告</a><span>2020-10-31</span></li>
+                                    <li><a href="#">检测点一温度警告</a><span>2020-10-31</span></li>
+                                    <li><a href="#">检测点一温度警告</a><span>2020-10-31</span></li>
+                                    <li><a href="#">检测点一温度警告</a><span>2020-10-31</span></li>
+                                    <li><a href="#">检测点一温度警告</a><span>2020-10-31</span></li>
+                                    <li><a href="#">检测点二湿度警告</a><span>2020-10-31</span></li>
+                                    <li><a href="#">检测点三震动噪声警告</a><span>2020-10-31</span></li>
+                                    <li><a href="#">检测点一松弛度警告</a><span>2020-10-31</span></li>
+                                    <li><a href="#">检测点一皮带涨紧警告</a><span>2020-10-31</span></li>
+                                    <li><a href="#">检测点一温度警告</a><span>2020-10-31</span></li>
+                                    <li><a href="#">检测点一温度警告</a><span>2020-10-31</span></li>
+                                    <li><a href="#">检测点一温度警告</a><span>2020-10-31</span></li>
+                                    <li><a href="#">检测点一温度警告</a><span>2020-10-31</span></li>
+                                  </ul>
+                              </div>
+                            </div>
+                              <!--  慕课网课程公告结束 -->  
+                          </div>
                         </div>
                       </div>
                       
@@ -61,24 +89,7 @@
                       
                       <div class="row">
                         
-                        <div class="col-md-6" id="roll">
-                          <div class="messageWrap borderBox">
-                            <div class="message borderBox">
-                                <ul id="notice">
-                                  <li><a href="#">一号生产线检测点一温度警告</a><span>2020-10-31</span></li>
-                                  <li><a href="#">一号生产线检测点二湿度警告</a><span>2020-10-31</span></li>
-                                  <li><a href="#">一号生产线检测点三震动噪声警告</a><span>2020-10-31</span></li>
-                                  <li><a href="#">一号生产线检测点一松弛度警告</a><span>2020-10-31</span></li>
-                                  <li><a href="#">一号生产线检测点一皮带涨紧警告</a><span>2020-10-31</span></li>
-                                  <li><a href="#">一号生产线检测点一温度警告</a><span>2020-10-31</span></li>
-                                  <li><a href="#">一号生产线检测点一温度警告</a><span>2020-10-31</span></li>
-                                  <li><a href="#">一号生产线检测点一温度警告</a><span>2020-10-31</span></li>
-                                  <li><a href="#">一号生产线检测点一温度警告</a><span>2020-10-31</span></li>
-                                </ul>
-                            </div>
-                          </div>
-                            <!--  慕课网课程公告结束 -->  
-                        </div>
+                        
                         <div class="col-md-6">
                           <div id="map">
                           <!-- How to change your own map point
