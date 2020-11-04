@@ -10,32 +10,35 @@
                     <form class="form-horizontal" role="form">
                       <div class="form-group">
                         <div class="col-sm-6">
-                          日期段：
-                          <input type="date" name="datetime_1" class="form-control" id="date"/>
-                          <input type="date" name="datetime_2" class="form-control" id="date"/>
-                        </div>
-                        <div>
-                          <div class="col-sm-6">
-                            生产线：<select class="form-control">
-                              <option value="volvo">生产线1</option>
-                              <option value="saab">生产线2</option>
-                              <option value="opel">生产线3</option>
-                              <option value="audi">生产线4</option>
-                            </select>
+                          起始日期：
+                          <input type="date" name="datetime_1" class="date-picker" id="date"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          结束日期：
+                          <input type="date" name="datetime_2" class="date-picker" id="date"/>
+                          <br><br>
+                          <div class="form-group">
+                            <div class="col-sm-6">
+                                生产线选择:<select class="form-control">
+                                <option value="volvo">生产线1</option>
+                                <option value="saab">生产线2</option>
+                                <option value="opel">生产线3</option>
+                              </select>
+                            </div>
+                            <div class="col-sm-6">
+                              数据类型:<select class="form-control">
+                                <option value="volvo">温度</option>
+                                <option value="saab">机器温度</option>
+                                <option value="opel">湿度</option>
+                                <option value="audi">压力</option>
+                              </select>
+                            </div>
                           </div>
+                          
                         </div>
+                  
                       </div>
+                 
+    
                       
-                      <div class="form-group">
-                        <div class="col-sm-6">
-                          数据类型:<select class="form-control">
-                            <option value="volvo">温度</option>
-                            <option value="saab">机器温度</option>
-                            <option value="opel">湿度</option>
-                            <option value="audi">压力</option>
-                          </select>
-                        </div>
-                      </div>
 
                       <div class="form-group">
                         <div class="col-sm-6">
@@ -62,6 +65,10 @@
 
 {% block script %}
 <script type="text/javascript">
+    var defaultDate = document.querySelectorAll('.date-picker');
+    for (var i = 0; i<defaultDate.length; i++) {
+        defaultDate[i].valueAsDate = new Date();
+    }
   $(function () {
       $('#table').bootstrapTable({
           url: '/device',  // 请求数据源的路由
