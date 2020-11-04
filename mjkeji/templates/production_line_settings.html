@@ -5,8 +5,26 @@
 
 {% endblock%}
 {% block content %}
-<div class="container-fluid">
+<form class="form-horizontal" role="form">
+    
+    <div class="form-group">
+      <div class="col-sm-6">
+        厂区选择:<select class="form-control">
+          <option value="volvo">厂区1</option>
+          <option value="saab">厂区2</option>
+          <option value="opel">厂区3</option>
+        </select>
+      </div>
+    </div>
 
+    <div class="form-group">
+      <div class="col-sm-6">
+        <input type="button" id="submit" value="查看" class="form-control">
+      </div>
+    </div>
+
+  </form>
+<div class="container-fluid">
   <div class="row col-sm-12">
       <table id="table"></table>
   </div>

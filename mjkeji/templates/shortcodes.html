@@ -52,107 +52,77 @@
             <!-- 数据展示表格 -->
             <section class="tables">
               <div class="container-fluid">
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="section-heading">
-                      <h2>Tables</h2>
-                    </div>
-                    <div class="default-table">
-                      <table>
-                        <thead>
-                          <tr>
-                            <th>编号</th>
-                            <th>数据</th>
-                            <th>时间</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>#1011</td>
-                            <td>35 ℃</td>
-                            <td>2020年11月11日 9时8分</td>
-                          </tr>
-                          <tr>
-                            <td>#1012</td>
-                            <td>35 ℃</td>
-                            <td>2020年11月11日 9时8分</td>
-                          </tr>
-                          <tr>
-                            <td>#1013</td>
-                            <td>35 ℃</td>
-                            <td>2020年11月11日 9时8分</td>
-                          </tr>
-                          <tr>
-                            <td>#1014</td>
-                            <td>35 ℃</td>
-                            <td>2020年11月11日 9时8分</td>
-                          </tr>
-                          <tr>
-                            <td>#1015</td>
-                            <td>35 ℃</td>
-                            <td>2020年11月11日 9时8分</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <ul class="table-pagination">
-                        <li><a href="#">Previous</a></li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">...</a></li>
-                        <li><a href="#">8</a></li>
-                        <li><a href="#">9</a></li>
-                        <li><a href="#">Next</a></li>
-                      </ul>
-                    </div>
-                    <!-- <div class="alternate-table">
-                      <table>
-                        <thead>
-                          <tr>
-                            <th>编号</th>
-                            <th>数据</th>
-                            <th>时间</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>#2005</td>
-                            <td>Lorem ipsum dolor sit amet</td>
-                            <td>$19.95</td>
-                          </tr>
-                          <tr>
-                            <td>#2006</td>
-                            <td>Lorem ipsum dolor sit amet</td>
-                            <td>$19.95</td>
-                          </tr>
-                          <tr>
-                            <td>#2007</td>
-                            <td>Lorem ipsum dolor sit amet</td>
-                            <td>$19.95</td>
-                          </tr>
-                          <tr>
-                            <td>#2008</td>
-                            <td>Lorem ipsum dolor sit amet</td>
-                            <td>$19.95</td>
-                          </tr>
-                          <tr>
-                            <td>#2008</td>
-                            <td>Lorem ipsum dolor sit amet</td>
-                            <td>$19.95</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <ul class="table-pagination">
-                        <li><a href="#">Previous</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">...</a></li>
-                        <li class="active"><a href="#">8</a></li>
-                        <li><a href="#">9</a></li>
-                        <li><a href="#">Next</a></li>
-                      </ul>
-                    </div> -->
-                  </div>
+
+                <div class="row col-sm-12">
+                    <table id="table"></table>
                 </div>
               </div>
             </section>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+  $(function () {
+      $('#table').bootstrapTable({
+          url: '/device',  // 请求数据源的路由
+          method:'GET' ,
+          dataType: "json",
+          sortable: true, //是否启用排序
+          sortOrder: "asc", //排序方式
+          pagination: true, //前端处理分页
+          singleSelect: false,//是否只能单选
+          search: true, //显示搜索框，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+          toolbar: '#toolbar', //工具按钮用哪个容器
+          striped: true, //是否显示行间隔色
+          cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+          pageNumber: 1, //初始化加载第10页，默认第一页
+          pageSize: 10, //每页的记录行数（*）
+          pageList: [10, 20, 50, 100], //可供选择的每页的行数（*）
+          strictSearch: true,//设置为 true启用 全匹配搜索，false为模糊搜索
+          showColumns: true, //显示内容列下拉框
+          showRefresh: true, //显示刷新按钮
+          minimumCountColumns: 2, //当列数小于此值时，将隐藏内容列下拉框
+          clickToSelect: true, //设置true， 将在点击某行时，自动勾选rediobox 和 checkbox
+          uniqueId: "id", //每一行的唯一标识，一般为主键列
+          showToggle: true, //是否显示详细视图和列表视图的切换按钮
+          cardView: false, //是否显示详细视图
+          sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
+          columns: [{  //定义表头,这个表头必须定义,下边field后边跟的字段名字必须与后端传递的字段名字相同.如:id、name、price 跟后端的字段名id  name price是完全一样的.
+
+              field: 'id',
+              title: '设备序号',
+              align: 'center',
+              valign: 'middle',  //对齐方式，居中
+              width: '200px'  // 可以写各种样式#}
+
+          }, {
+              field: 'name',
+              title: '设备名称',
+              valign: 'middle',
+              align: 'center'
+          }, 
+          {
+              field: 'status',
+              title: '设备状态',
+              valign: 'middle',
+              align: 'center'
+          },
+          {
+              title: '操作',
+              field: 'id',
+              valign: 'middle',
+              align: 'center',
+              formatter: function (value, row, index) {
+                
+                  var e = "<input type='submit' id='editbutton' class='btn btn-success btn-sm editbutton' value='修改'></input>";  //row.id为每行的id
+                  var d = "<input type='submit' class='btn btn-warning btn-sm delbutton' value='删除'></input>";
+                  return e + d;
+              }
+          }
+          ],
+      });
+  });
+
+
+</script>
 {% endblock %}

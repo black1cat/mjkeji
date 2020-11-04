@@ -8,12 +8,19 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet"> -->
-    <script src="static/vendor/jquery/jquery.min.js"></script>
     <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="static/assets/css/base_page.css" rel="stylesheet">
+    <!-- <link href="{{url_for('static',filename='vendor/jquery-treegrid/css/jquery-treegrid.css')}}" rel="stylesheet"></link> -->
     <link rel="stylesheet" href="{{url_for('static',filename='vendor/bootstrap-table/bootstrap-table.css')}}">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-treegrid/0.2.0/css/jquery.treegrid.min.css">
+    <script src="static/vendor/jquery/jquery.min.js"></script>
+    <script src="{{url_for('static',filename='vendor/bootstrap/js/bootstrap.js')}}"></script>
     <script src="{{url_for('static',filename='vendor/bootstrap-table/bootstrap-table.js')}}"></script>
     <script src="{{url_for('static',filename='vendor/bootstrap-table/locale/bootstrap-table-zh-CN.js')}}"></script>
+    <!-- <script src="{{url_for('static',filename='vendor/jquery-treegrid/js/jquery-treegrid.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/jquery-treegrid/js/jquery-treegrid.bootstrap3.js')}}"></script> -->
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.12.0/extensions/treegrid/bootstrap-table-treegrid.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-treegrid/0.2.0/js/jquery.treegrid.min.js"></script>
     <!--    引入echars图表-->
     <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
 
@@ -48,7 +55,7 @@
 
           </div>
         </div>
-
+        <div style="float:left;width: 1px;height: 100%; background: #000;"></div>
       <!-- Sidebar -->
         <div id="sidebar">
 
@@ -67,13 +74,13 @@
             <!-- Menu -->
             <nav id="menu">
               <ul>
-                <li><a href="index">数据采集</a></li>
-                <li><a href="simple_page">异常检测</a></li>
-                <li><a href="shortcodes">数据展示</a></li>
+                <li><a href="index"><span class="glyphicon glyphicon-stats" aria-hidden="true">  数据采集</span></a></li>
+                <li><a href="simple_page"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true">  异常检测</span></a></li>
+                <li><a href="shortcodes"><span class="glyphicon glyphicon-signal" aria-hidden="true">  数据展示</span></a></li>
                 <li>
-                  <span class="opener">系统设置</span>
+                  <span class="opener"><span class="glyphicon glyphicon-asterisk" aria-hidden="true">  系统设置</span></span>
                   <ul>
-                    <li><a href="plant_settings">厂区设置</a></li>
+                    <li><a href="plant_settings" class='active'>厂区设置</a></li>
                     <li><a href="production_line_settings">生产线设置</a></li>
                     <li><a href="device_settings">设备设置</a></li>
                     <li><a href="database">数据仓库</a></li>
@@ -91,7 +98,7 @@
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
     
-    <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 
     <script src="static/assets/js/browser.min.js"></script>
     <script src="static/assets/js/breakpoints.min.js"></script>
