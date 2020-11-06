@@ -5,25 +5,19 @@
 
 {% endblock%}
 {% block content %}
-<form class="form-horizontal" role="form">
-    
-    <div class="form-group">
-      <div class="col-sm-6">
-        厂区选择:<select class="form-control">
-          <option value="volvo">厂区1</option>
-          <option value="saab">厂区2</option>
-          <option value="opel">厂区3</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <div class="col-sm-6">
-        <input type="button" id="submit" value="查看" class="form-control">
-      </div>
-    </div>
-
-  </form>
+<form>
+  <div class="form-group col-md-3">
+    <label for="sel1">厂区选择</label>
+    <select class="form-control" id="sel1" >
+      <option>厂区1</option>
+      <option>厂区2</option>
+      <option>厂区3</option>
+      <option>厂区4</option>
+    </select>
+  </div>
+  <br>
+  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<button class="btn btn-info" id="start">确认</button>
+</form>
   <section></section>
 <div class="container-fluid">
   <div class="row col-sm-12">

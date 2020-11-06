@@ -2,7 +2,8 @@
 {% block content %}
             <!--  历史数据查看表单-->
             <!-- Page Heading -->
-            <div class="page-heading">
+            
+            <div class="page-heading" style="height:10px;">
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-md-12">
@@ -10,39 +11,39 @@
                     <form class="form-horizontal" role="form">
                       <div class="form-group">
                         <div class="col-sm-6">
-                          起始日期：
-                          <input type="date" name="datetime_1" class="date-picker" id="date"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          结束日期：
-                          <input type="date" name="datetime_2" class="date-picker" id="date"/>
-                          <br><br>
-                          <div class="form-group">
-                            <div class="col-sm-6">
-                                生产线选择:<select class="form-control">
-                                <option value="volvo">生产线1</option>
-                                <option value="saab">生产线2</option>
-                                <option value="opel">生产线3</option>
-                              </select>
-                            </div>
-                            <div class="col-sm-6">
-                              数据类型:<select class="form-control">
-                                <option value="volvo">温度</option>
-                                <option value="saab">机器温度</option>
-                                <option value="opel">湿度</option>
-                                <option value="audi">压力</option>
-                              </select>
-                            </div>
-                          </div>
+                          起始日期：&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&nbsp;结束日期：
+                          <br>
+                          <input type="date" name="datetime_1" class="date-picker" id="date"/>
+                          &emsp;&emsp;&emsp;
+                           <input type="date" name="datetime_2" class="date-picker" id="date"/>
+                          
                           
                         </div>
-                  
+                        <div class="form-group">
+                          <div class="col-sm-3">
+                              生产线选择:<select class="form-control">
+                              <option value="volvo">生产线1</option>
+                              <option value="saab">生产线2</option>
+                              <option value="opel">生产线3</option>
+                            </select>
+                          </div>
+                          <div class="col-sm-3">
+                            数据类型:<select class="form-control">
+                              <option value="volvo">温度</option>
+                              <option value="saab">机器温度</option>
+                              <option value="opel">湿度</option>
+                              <option value="audi">压力</option>
+                            </select>
+                          </div>
+                        </div>
                       </div>
                  
     
                       
 
                       <div class="form-group">
-                        <div class="col-sm-6">
-                          <input type="button" id="submit" value="查看" class="form-control">
+                        <div class="col-sm-1" id='button'>
+                          <input type="button" id="submit" value="查看" class="form-control btn-info">
                         </div>
                       </div>
 
@@ -53,14 +54,14 @@
             </div>
             
             <!-- 数据展示表格 -->
-            <section class="tables">
+          
+            <div class="tables">
               <div class="container-fluid">
-
-                <div class="row col-sm-12">
+                <div class="col-sm-12">
                     <table id="table"></table>
                 </div>
               </div>
-            </section>
+            </div>
 {% endblock %}
 
 {% block script %}
