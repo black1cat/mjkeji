@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet"> -->
+    <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/assets/css/base_page.css" rel="stylesheet">
+    <!-- <link href="{{url_for('static',filename='vendor/jquery-treegrid/css/jquery-treegrid.css')}}" rel="stylesheet"></link> -->
+    <link rel="stylesheet" href="{{url_for('static',filename='vendor/bootstrap-table/bootstrap-table.css')}}">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-treegrid/0.2.0/css/jquery.treegrid.min.css">
+    <script src="static/vendor/jquery/jquery.min.js"></script>
+    <script src="{{url_for('static',filename='vendor/bootstrap/js/bootstrap.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/bootstrap-table/bootstrap-table.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/bootstrap-table/locale/bootstrap-table-zh-CN.js')}}"></script>
+    <!-- <script src="{{url_for('static',filename='vendor/jquery-treegrid/js/jquery-treegrid.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/jquery-treegrid/js/jquery-treegrid.bootstrap3.js')}}"></script> -->
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.12.0/extensions/treegrid/bootstrap-table-treegrid.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-treegrid/0.2.0/js/jquery.treegrid.min.js"></script>
+    <!--    引入echars图表-->
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="static/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="static/assets/css/templatemo-style.css">
+    <link rel="stylesheet" href="static/assets/css/owl.css">
+    {% block head %}
+    {% endblock %}
+  </head>
+
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+      <!-- Main -->
+        <div id="main">
+          <div class="inner">
+
+            <!-- Header -->
+            <header id="header">
+              <div class="logo">
+              </div>
+            </header>
+
+          {% block content %}
+            
+          {% endblock %}
+            <!-- Right Image -->
+
+
+          </div>
+        </div>
+        <div style="float:left;width: 1px;height: 100%; background: #000;"></div>
+      <!-- Sidebar -->
+        <div id="sidebar">
+
+          <div class="inner">
+
+            <!-- Search Box -->
+             
+            <section id="search" class="alt">
+              <!-- <form method="get" action="#">
+                <input type="text" name="search" id="search" placeholder="Search..." />
+              </form> -->
+                <div class="logo">
+                  山东明佳科技有限公司
+                </div>
+            </section>
+            <!-- Menu -->
+            <nav id="menu">
+              <ul>
+                <li><a href="index"><span class="glyphicon glyphicon-stats" aria-hidden="true">  数据采集</span></a></li>
+                <li><a href="simple_page"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true">  异常检测</span></a></li>
+                <li><a href="shortcodes"><span class="glyphicon glyphicon-signal" aria-hidden="true">  数据展示</span></a></li>
+                <li>
+                  <span class="opener"><span class="glyphicon glyphicon-asterisk" aria-hidden="true">  系统设置</span></span>
+                  <ul>
+                    <li><a href="plant_settings" class='active'>厂区设置</a></li>
+                    <li><a href="production_line_settings">生产线设置</a></li>
+                    <li><a href="device_settings">设备设置</a></li>
+                    <li><a href="database">数据仓库</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+
+
+          </div>
+        </div>
+
+    </div>
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+    
+    <!-- <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+
+    <script src="static/assets/js/browser.min.js"></script>
+    <script src="static/assets/js/breakpoints.min.js"></script>
+    <script src="static/assets/js/transition.js"></script>
+    <script src="static/assets/js/owl-carousel.js"></script>
+    <script src="static/assets/js/custom.js"></script>
+    {% block mapscript %}
+    {% endblock %}
+</body>
+{% block script %}
+ 
+
+{% endblock %}

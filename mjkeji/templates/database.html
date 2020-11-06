@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block head%}
+
+
+{% endblock%}
+{% block content %}
+<div class="container-fluid">
+
+  <div class="row col-sm-12">
+      <table id="table"></table>
+  </div>
+</div>        
+{% endblock %}
+
+{% block script %}
+<script>
+    var $table = $('#table')
+  
+    $(function() {
+      $table.bootstrapTable({
+        url: 'product_line',
+        idField: 'id',
+        showColumns: true,
+        columns: [
+          {
+            field: 'id',
+            checkbox: true
+          },
+          {
+            field: 'name',
+            title: '名称'
+          },
+          {
+            field: 'status',
+            title: '状态',
+            sortable: true,
+            align: 'center',
+            formatter: 'statusFormatter'
+          }
+         
+        ],
+        treeShowField: 'name',
+        parentIdField: 'id',
+        onPostBody: function() {
+          var columns = $table.bootstrapTable('getOptions').columns
+  
+          if (columns && columns[0][1].visible) {
+            $table.treegrid({
+              treeColumn: 1,
+              onChange: function() {
+                $table.bootstrapTable('resetView')
+              }
+            })
+          }
+        }
+      })
+    })
+  
+    function typeFormatter(value, row, index) {
+      if (value === 'menu') {
+        return '菜单'
+      }
+      if (value === 'button') {
+        return '按钮'
+      }
+      if (value === 'api') {
+        return '接口'
+      }
+      return '-'
+    }
+  
+    function statusFormatter(value, row, index) {
+      if (value === 1) {
+        return '<span class="label label-success">正常</span>'
+      }
+      return '<span class="label label-default">锁定</span>'
+    }
+  </script>
+{% endblock %}
