@@ -74,7 +74,7 @@ for( var i = 0;i < points.length; i++){
   var marker1 = new BMap.Marker(point1,{icon: myIcon});
   map.addOverlay(marker1);
   
-  var label1 = new BMap.Label("<a href=#start>工厂B</a>",{"offset":new BMap.Size(25,20)});
+  var label1 = new BMap.Label("<a href=#xx>工厂B</a>",{"offset":new BMap.Size(25,20)});
   marker1.setLabel(label1);
   
 label1.setStyle({

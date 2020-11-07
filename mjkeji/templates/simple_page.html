@@ -26,9 +26,11 @@
         margin-bottom: 2px;
         
       }
+      .simple-post{height: 600px;margin-top: 0;}
+      #warning{margin: 0;padding-top: 0;}
       #rollbox {margin:5px 0px;padding:10px 0px;}
       #banner{float:left;margin-left:30px;padding:10px;width:100px;height:200px;background: url(static/assets/images/history.png);}
-      
+      #top_image{margin-top: 0;}
       #notice span{float:right}
       #form-group{margin-top: 100px;}
     </style>
@@ -46,7 +48,7 @@
                     </div>
                   </div>
                   <!-- Simple Post -->
-                  <section class="simple-post">
+                  <div class="simple-post">
                     <div class="container-fluid">
                       <div class="row">
                         <div class="col-md-12" >
@@ -86,37 +88,23 @@
                      
                       
                     </div>
-                  </section>
+                  </div>
                   <!-- Contact Form -->
-                  <section class="contact-form">
+                  <div class="contact-form" id="warning">
                     
-                    <div class="container-fluid">
+                    <div class="container-fluid" >
                       
                       <div class="row">
-                        <section class="top-image">
-                          <div class="container-fluid">
-                            <form>
-                              <div class="form-group">
-                                <label for="sel1">生产线</label>
-                                <select class="form-control" id="sel1" >
-                                  <option>生产线1</option>
-                                  <option>生产线2</option>
-                                  <option>生产线3</option>
-                                  <option>生产线4</option>
-                                </select>
-                                <br>
-                                <button class="btn btn-default" id="start">采集</button>
-                              </div>
-                            </form>
-                          </div>
-                          <ul class="nav nav-pills">
+                        <div class="top-image" id="top_image">
+                          
+                          <ul class="nav nav-pills" id="xx">
                             <li role="presentation" class="active"><a href="index">机器温度</a></li>
                             <li role="presentation"><a href="temperature">环境状况</a></li>
                             <li role="presentation"><a href="noise">噪声情况</a></li>
                             <li role="presentation"><a href="strap">皮带情况</a></li>
                             <li role="presentation"><a href="chain">链条情况</a></li>
                           </ul>
-                          <section class="left-image">
+                          <div class="left-image">
                             <div class="container-fluid">
                               <div class="row">
                                 <div class="col-md-6">
@@ -125,8 +113,8 @@
                             
                               </div>
                             </div>
-                          </section>
-                          </section>
+                          </div>
+                          </div>
                         
                         <div class="col-md-6">
                           <div id="map">
@@ -142,7 +130,7 @@
                         </div>
                       </div>
                     </div>
-                  </section>     
+                  </div>     
 {% endblock %}
 
 
@@ -151,32 +139,5 @@
     <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=1lXrSsIRvQ10kSUTf9d84CzEvHwnY1F1"></script>
     <script type="text/javascript" src="static/assets/js/map.js"></script>
     <script type="text/javascript" src="static/assets/js/roll.js"></script>
-    <script type="text/javascript">
-      // 基于准备好的dom，初始化echarts实例
-      var myChart = echarts.init(document.getElementById('temperature'));
     
-      // 指定图表的配置项和数据
-      var option1 = {
-        title: {
-          text: '温度'
-        },
-        tooltip: {},
-        legend: {
-          data:['温度']
-        },
-        xAxis: {
-          data: ["0时","3时","6时","9时","12时","15时","18时","21时","24时"]
-        },
-        yAxis: {},
-        series: [{
-          name: '温度',
-          type: 'line',
-          data: [5, 20, 36, 10, 10, 20,24,3,56]
-        }]
-      };
-      // 使用刚指定的配置项和数据显示图表。
-      myChart.setOption(option1);
-     
-    
-    </script>
     {% endblock %}
