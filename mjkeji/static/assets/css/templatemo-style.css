@@ -1102,7 +1102,7 @@ section.buttons .container-fluid {
 	    padding: 15px;
 	}
 	#header {
-	    margin: -15px!important;
+        margin: -15px!important;
 	}
 	section.main-banner {
 		margin-top: 30px;
@@ -1206,6 +1206,7 @@ section.buttons .container-fluid {
     position: relative;
     background-color:#305680;
     margin: -100px -100px 100px -100px;
+    margin-block-end: 50px;
 }
 
 #header .logo {

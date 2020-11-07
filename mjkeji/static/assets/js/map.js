@@ -48,15 +48,25 @@ for( var i = 0;i < points.length; i++){
   });
   var point = new BMap.Point(points[i][0],points[i][1]);
   var marker = new BMap.Marker(point,{icon: myIcon});
+//   var opts = {
+//     width: 200,
+//     height: 100,
+//     title: '故宫博物院'
+// };
+// var infoWindow = new BMap.InfoWindow('地址：北京市东城区王府井大街88号乐天银泰百货八层', opts);
+// // 点标记添加点击事件
+// marker.addEventListener('click', function () {
+//     map.openInfoWindow(infoWindow, point); // 开启信息窗口
+// });
   map.addOverlay(marker);
-  var label = new BMap.Label("<a href=#start>工厂A</a>",{"offset":new BMap.Size(25,20)});
+//   var label = new BMap.Label("<a href=#start>工厂A</a>",{"offset":new BMap.Size(25,20)});
   
-  marker.setLabel(label);
-  label.setStyle({
-    borderColor:"#808080",
-    color:"#333",
-    cursor:"pointer"
-});
+//   marker.setLabel(label);
+//   label.setStyle({
+//     borderColor:"#808080",
+//     color:"#333",
+//     cursor:"pointer"
+// });
 }
   for( var j = 0;j < points1.length; j++){
     var myIcon = new BMap.Icon("static/assets/images/icon_redmarker.png", new BMap.Size(25, 40), {
@@ -72,25 +82,35 @@ for( var i = 0;i < points.length; i++){
   
   
   var marker1 = new BMap.Marker(point1,{icon: myIcon});
+  var opts = {
+    width: 200,
+    height: 100,
+    title: '<h3>危险预警</h3>'
+};
+var infoWindow = new BMap.InfoWindow('<h4>监测点一温度警告</h4>', opts);
+// 点标记添加点击事件
+marker1.addEventListener('click', function () {
+    map.openInfoWindow(infoWindow, point1); // 开启信息窗口
+});
   map.addOverlay(marker1);
   
-  var label1 = new BMap.Label("<a href=#xx>工厂B</a>",{"offset":new BMap.Size(25,20)});
-  marker1.setLabel(label1);
+//   var label1 = new BMap.Label("<a href=#xx>工厂B</a>",{"offset":new BMap.Size(25,20)});
+//   marker1.setLabel(label1);
   
-label1.setStyle({
-  borderColor:"#808080",
-  color:"#333",
-  cursor:"pointer"
-});
+// label1.setStyle({
+//   borderColor:"#808080",
+//   color:"#333",
+//   cursor:"pointer"
+// });
 };
 
 }
 //创建InfoWindow
-function createInfoWindow(i){
-  var json = markerArr[i];
-  var iw = new BMap.InfoWindow("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>"+json.content+"</div>");
-  return iw;
-}
+// function createInfoWindow(i){
+//   var json = markerArr[i];
+//   var iw = new BMap.InfoWindow("asdsa");
+//   return iw;
+// }
 //创建一个Icon
 
 
