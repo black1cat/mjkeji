@@ -2,7 +2,7 @@
     {% block head%}
     <style type="text/css">
       #dituContent {width:550px;height:550px;border:#ccc solid 1px;float: left;}
-     
+     #roll{background: url(static/assets/images/bg_error.png) no-repeat;height: 550px;}
       .messageWrap{
       bottom:0;
       width:100%;
@@ -26,6 +26,9 @@
         margin-bottom: 2px;
         
       }
+      #rollbox {margin:5px 0px;padding:10px 0px;}
+      #banner{float:left;margin-left:30px;padding:10px;width:100px;height:200px;background: url(static/assets/images/history.png);}
+      
       #notice span{float:right}
       #form-group{margin-top: 100px;}
     </style>
@@ -37,7 +40,7 @@
                     <div class="container-fluid">
                       <div class="row">
                         <div class="col-md-12">
-                          <h1>The map</h1>
+                          <h1>异常概览</h1>
                         </div>
                       </div>
                     </div>
@@ -49,7 +52,8 @@
                         <div class="col-md-12" >
                           <div  id="dituContent"></div>
                           <div class="col-md-4" id="roll">
-                            <div class="messageWrap borderBox">
+                            <div class="messageWrap borderBox" id="rollbox">
+                              
                               <div class="message borderBox">
                                   <ul id="notice">
                                     <li><a href="#">检测点一温度警告</a><span>2020-10-31</span></li>
@@ -69,13 +73,13 @@
                                     <li><a href="#">检测点一温度警告</a><span>2020-10-31</span></li>
                                     <li><a href="#">检测点一温度警告</a><span>2020-10-31</span></li>
                                     <li><a href="#">检测点一温度警告</a><span>2020-10-31</span></li>
-                                    <li><a href="#">检测点一温度警告</a><span>2020-10-31</span></li>
+                                    
                                   </ul>
                               </div>
                             </div>
                               <!--  慕课网课程公告结束 -->  
                           </div>
-                          
+                          <div id="banner"></div>
                         </div>
                       </div>
                       

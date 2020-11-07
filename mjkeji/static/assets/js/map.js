@@ -27,7 +27,7 @@ function addMapControl(){
                   }
 
 //标注点数组
-var markerArr = [{title:'<a href="http://127.0.0.1:5000/index">A</a>',content:"厂区A",point:"117.002652|36.184504",isOpen:0,icon:{w:23,h:25,l:0,t:21,x:9,lb:12}}
+var markerArr = [{title:'<a href=#start>A</a>',content:"厂区A",point:"117.002652|36.184504",isOpen:0,icon:{w:23,h:25,l:0,t:21,x:9,lb:12}}
 ];
 //创建marker
 function addMarker(){
@@ -49,7 +49,7 @@ for( var i = 0;i < points.length; i++){
   var point = new BMap.Point(points[i][0],points[i][1]);
   var marker = new BMap.Marker(point,{icon: myIcon});
   map.addOverlay(marker);
-  var label = new BMap.Label("<a href='http://127.0.0.1:5000/simple_page'>工厂A</a>",{"offset":new BMap.Size(25,20)});
+  var label = new BMap.Label("<a href=#start>工厂A</a>",{"offset":new BMap.Size(25,20)});
   
   marker.setLabel(label);
   label.setStyle({
@@ -74,7 +74,7 @@ for( var i = 0;i < points.length; i++){
   var marker1 = new BMap.Marker(point1,{icon: myIcon});
   map.addOverlay(marker1);
   
-  var label1 = new BMap.Label("<a href='http://127.0.0.1:5000/simple_page'>工厂B</a>",{"offset":new BMap.Size(25,20)});
+  var label1 = new BMap.Label("<a href=#start>工厂B</a>",{"offset":new BMap.Size(25,20)});
   marker1.setLabel(label1);
   
 label1.setStyle({
