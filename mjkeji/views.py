@@ -1,10 +1,13 @@
 
 
-from mjkeji.model import Device, Factory_area, Message,User,Product_line,Factory_area,Device
+from mjkeji.model import Device, Factory_area, Message,User,Product_line,Factory_area,Device,Warning
 from mjkeji import app,db,login_manager
 from flask import render_template, request, url_for, redirect, flash,jsonify
 from flask_login import login_user
 from random import choice
+@app.route('/test',methods=['GET','POST'])
+def test():
+    return render_template('test.html')
 @app.route('/login',methods=['GET','POST'])
 @app.route('/',methods=['GET','POST'])
 def login():
@@ -118,6 +121,138 @@ def device():
         d['id'] = i.id
         d['name'] = i.name # 随机选取汉字并拼接
         d['status'] = i.status
+        data.append(d)
+    
+    print(data)
+    if request.method == 'POST':
+        print('post')
+    if request.method == 'GET':
+        info = request.values
+        limit = info.get('limit', 10)  # 每页显示的条数
+        offset = info.get('offset', 0)  # 分片数，(页码-1)*limit，它表示一段数据的起点
+        print('get', limit)
+        print('get  offset', offset)
+        return jsonify({'total': len(data), 'rows': data[int(offset):(int(offset) + int(limit))]})
+@app.route('/t_warning',methods=['GET','POST'])
+def t_warning():
+    data = []
+    names  = Warning.query.all()
+    for i in names:
+        d = {}
+        d['id'] = i.id
+        d['time'] = i.time # 随机选取汉字并拼接
+        d['device'] = i.device
+        d['type'] = i.type
+        d['warn_data'] = i.warn_data
+        data.append(d)
+    
+    print(data)
+    if request.method == 'POST':
+        print('post')
+    if request.method == 'GET':
+        info = request.values
+        limit = info.get('limit', 10)  # 每页显示的条数
+        offset = info.get('offset', 0)  # 分片数，(页码-1)*limit，它表示一段数据的起点
+        print('get', limit)
+        print('get  offset', offset)
+        return jsonify({'total': len(data), 'rows': data[int(offset):(int(offset) + int(limit))]})
+@app.route('/h_warning',methods=['GET','POST'])
+def h_warning():
+    data = []
+    for i in range(11):
+        d = {}
+        d['id'] = i
+        d['time'] = "2020.10.1"  # 随机选取汉字并拼接
+        d['device'] = "温度计"
+        d['type'] = "温度异常"
+        d['warn_data'] = "温度过高"
+        data.append(d)
+    
+    print(data)
+    if request.method == 'POST':
+        print('post')
+    if request.method == 'GET':
+        info = request.values
+        limit = info.get('limit', 10)  # 每页显示的条数
+        offset = info.get('offset', 0)  # 分片数，(页码-1)*limit，它表示一段数据的起点
+        print('get', limit)
+        print('get  offset', offset)
+        return jsonify({'total': len(data), 'rows': data[int(offset):(int(offset) + int(limit))]})
+
+    data = []
+    for i in range(11):
+        d = {}
+        d['id'] = i
+        d['time'] = "2020.10.1"  # 随机选取汉字并拼接
+        d['device'] = "温度计"
+        d['type'] = "温度异常"
+        d['warn_data'] = "温度过高"
+        data.append(d)
+    
+    print(data)
+    if request.method == 'POST':
+        print('post')
+    if request.method == 'GET':
+        info = request.values
+        limit = info.get('limit', 10)  # 每页显示的条数
+        offset = info.get('offset', 0)  # 分片数，(页码-1)*limit，它表示一段数据的起点
+        print('get', limit)
+        print('get  offset', offset)
+        return jsonify({'total': len(data), 'rows': data[int(offset):(int(offset) + int(limit))]})
+@app.route('/n_warning',methods=['GET','POST'])
+def n_warning():
+    data = []
+    for i in range(11):
+        d = {}
+        d['id'] = i
+        d['time'] = "2020.10.1"  # 随机选取汉字并拼接
+        d['device'] = "噪声传感器"
+        d['type'] = "频率"
+        d['warn_data'] = "频率过高"
+        data.append(d)
+    
+    print(data)
+    if request.method == 'POST':
+        print('post')
+    if request.method == 'GET':
+        info = request.values
+        limit = info.get('limit', 10)  # 每页显示的条数
+        offset = info.get('offset', 0)  # 分片数，(页码-1)*limit，它表示一段数据的起点
+        print('get', limit)
+        print('get  offset', offset)
+        return jsonify({'total': len(data), 'rows': data[int(offset):(int(offset) + int(limit))]})
+@app.route('/s_warning',methods=['GET','POST'])
+def s_warning():
+    data = []
+    for i in range(11):
+        d = {}
+        d['id'] = i
+        d['time'] = "2020.10.1"  # 随机选取汉字并拼接
+        d['device'] = "皮带传感器"
+        d['type'] = "皮带异常"
+        d['warn_data'] = "温度过高"
+        data.append(d)
+    
+    print(data)
+    if request.method == 'POST':
+        print('post')
+    if request.method == 'GET':
+        info = request.values
+        limit = info.get('limit', 10)  # 每页显示的条数
+        offset = info.get('offset', 0)  # 分片数，(页码-1)*limit，它表示一段数据的起点
+        print('get', limit)
+        print('get  offset', offset)
+        return jsonify({'total': len(data), 'rows': data[int(offset):(int(offset) + int(limit))]})
+@app.route('/c_warning',methods=['GET','POST'])
+def c_warning():
+    data = []
+    for i in range(11):
+        d = {}
+        d['id'] = i
+        d['time'] = "2020.10.1"  # 随机选取汉字并拼接
+        d['device'] = "链条传感器"
+        d['type'] = "温度异常"
+        d['warn_data'] = "温度过高"
         data.append(d)
     
     print(data)

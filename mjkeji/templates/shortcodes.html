@@ -77,6 +77,7 @@
           dataType: "json",
           sortable: true, //是否启用排序
           sortOrder: "asc", //排序方式
+          sortStable:true,
           pagination: true, //前端处理分页
           singleSelect: false,//是否只能单选
           search: true, //显示搜索框，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
@@ -84,6 +85,8 @@
           striped: true, //是否显示行间隔色
           cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
           pageNumber: 1, //初始化加载第10页，默认第一页
+          detailViewIcon: true,
+          detailViewByClick:true,
           pageSize: 10, //每页的记录行数（*）
           pageList: [10, 20, 50, 100], //可供选择的每页的行数（*）
           strictSearch: true,//设置为 true启用 全匹配搜索，false为模糊搜索

@@ -1,4 +1,5 @@
 
+from logging import warn
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import UserMixin
 
@@ -56,3 +57,33 @@ class Device(db.Model):
   id = db.Column(db.Integer,primary_key=True)
   name = db.Column(db.String(128))
   status = db.Column(db.String(128)) # 设备状态
+class Warning(db.Model):
+  id = db.Column(db.Integer,primary_key=True)
+  time = db.Column(db.DateTime)
+  device = db.Column(db.String(128))
+  type = db.Column(db.String(128))
+  warn_data = db.Column(db.String(900))
+# class Hwarning(db.Model):
+#   id = db.Column(db.Integer,primary_key=True)
+#   time = db.Column(db.DateTime)
+#   device = db.Column(db.String(128))
+#   type = db.Column(db.String(128))
+#   warn_data = db.Column(db.String(900))
+# class Nwarning(db.Model):
+#   id = db.Column(db.Integer,primary_key=True)
+#   time = db.Column(db.DateTime)
+#   device = db.Column(db.String(128))
+#   type = db.Column(db.String(128))
+#   warn_data = db.Column(db.String(900))
+# class Swarning(db.Model):
+#   id = db.Column(db.Integer,primary_key=True)
+#   time = db.Column(db.DateTime)
+#   device = db.Column(db.String(128))
+#   type = db.Column(db.String(128))
+#   warn_data = db.Column(db.String(900))
+# class Cwarning(db.Model):
+#   id = db.Column(db.Integer,primary_key=True)
+#   time = db.Column(db.DateTime)
+#   device = db.Column(db.String(128))
+#   type = db.Column(db.String(128))
+#   warn_data = db.Column(db.String(900))
