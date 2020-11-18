@@ -1,4 +1,4 @@
-
+// 警告表格
     var defaultDate = document.querySelectorAll('.date-picker');
     for (var i = 0; i<defaultDate.length; i++) {
         defaultDate[i].valueAsDate = new Date();

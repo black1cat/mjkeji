@@ -9,10 +9,9 @@
   <div class="form-group col-md-3">
     <label for="sel1">厂区选择</label>
     <select class="form-control" id="sel1" >
-      <option>厂区1</option>
-      <option>厂区2</option>
-      <option>厂区3</option>
-      <option>厂区4</option>
+      {% for fac in factory_area %}
+      <option>{{ fac.name }}</option>
+      {% endfor %}
     </select>
   </div>
   <br>
@@ -20,6 +19,41 @@
 </form>
   <section></section>
 <div class="container-fluid">
+  <div id="toolbar" class="row container-fluid">
+    <div class="form-inline">
+        <div class="form-group">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">添加</button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">生产线基本信息</h4>
+                  </div>
+                  <form action="production_line_settings" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                          <label for="recipient-name" class="control-label">生产线名称：</label><br>
+                          <input type="text" class="form-control" id="recipient-name" name="line_name">
+                          
+                        </div>
+                        <br>
+                        <div class="form-group">
+                          <label for="recipient-name" class="control-label">归属厂区：</label><br>
+                          <input type="text" class="form-control" id="recipient-name" name="factory">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="关闭" name="close">
+                        <input class="btn btn-primary" type="submit" name="submit" value="添加">
+                      </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
   <div class="row col-sm-12">
       <table id="table"></table>
   </div>

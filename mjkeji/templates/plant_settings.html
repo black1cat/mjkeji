@@ -5,8 +5,39 @@
 
 {% endblock%}
 {% block content %}
-<div class="container-fluid">
 
+<div class="container-fluid">
+    <div id="toolbar" class="row container-fluid">
+        <div class="form-inline">
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">添加</button>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">厂区的基本信息</h4>
+                      </div>
+                      <form action="plant_settings" method="post">
+                        <div class="modal-body">
+                            <div class="form-group">
+                              <label for="recipient-name" class="control-label">厂区名称：</label>
+                              <input type="text" class="form-control" id="recipient-name" name="factory_name">
+                              
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-default" data-dismiss="modal" value="关闭" name="close">
+                            <input class="btn btn-primary" type="submit" name="submit" value="添加">
+                          </div>
+                      </form>
+                      
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
   <div class="row col-sm-12">
       <table id="table"></table>
   </div>
@@ -41,16 +72,23 @@
           showToggle: true, //是否显示详细视图和列表视图的切换按钮
           cardView: false, //是否显示详细视图
           sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
-          columns: [{  //定义表头,这个表头必须定义,下边field后边跟的字段名字必须与后端传递的字段名字相同.如:id、name、price 跟后端的字段名id  name price是完全一样的.
+          showToggle: false, //是否显示详细视图和列表视图的切换按钮
+          cardView: false, //是否显示详细视图
+          detailView: false, //是否显示父子表
+          clickToSelect: true,    //是否启用点击选中行
+          columns: [
+         {  //定义表头,这个表头必须定义,下边field后边跟的字段名字必须与后端传递的字段名字相同.如:id、name、price 跟后端的字段名id  name price是完全一样的.
 
               field: 'id',
               title: '厂区序号',
+              sortable: true,
               align: 'center',
               valign: 'middle',  //对齐方式，居中
               width: '200px'  // 可以写各种样式#}
 
           }, {
               field: 'name',
+              sortable: true,
               title: '厂区名称',
               valign: 'middle',
               align: 'center'
