@@ -726,14 +726,14 @@ section.buttons .container-fluid {
     width: 100%;
     text-align: center;
     letter-spacing: 0.5px;
-    color: #535ba0;
-    border: 2px solid #535ba0;
+    color: #007C36;
+    border: 2px solid #007C36;
     transition: all 0.5s;
     background-color: rgba(83,91,160,0.0);
 }
 .border-rectangle-button a:hover {
     color: #fff;
-    background-color: rgba(83,91,160,1);
+    background-color: rgba(0,124,54);
 }
 
 .filled-radius-button {
@@ -749,9 +749,9 @@ section.buttons .container-fluid {
     text-align: center;
     letter-spacing: 0.5px;
     color: #fff;
-    border: 2px solid #535ba0;
+    border: 2px solid #007C36;
     transition: all 0.5s;
-    background-color: rgba(83,91,160,1);
+    background-color: rgba(0,124,54);
     border-radius: 5px;
 }
 .filled-radius-button a:hover {
@@ -771,15 +771,15 @@ section.buttons .container-fluid {
     width: 100%;
     text-align: center;
     letter-spacing: 0.5px;
-    color: #535ba0;
-    border: 2px solid #535ba0;
+    color: #007C36;
+    border: 2px solid #007C36;
     transition: all 0.5s;
     background-color: rgba(83,91,160,0.0);
     border-radius: 5px;
 }
 .border-radius-button a:hover {
     color: #fff;
-    background-color: rgba(83,91,160,1);
+    background-color: rgba(0,124,54);
 }
 
 .filled-rounded-button {
@@ -795,9 +795,9 @@ section.buttons .container-fluid {
     text-align: center;
     letter-spacing: 0.5px;
     color: #fff;
-    border: 2px solid #535ba0;
+    border: 2px solid #007C36
     transition: all 0.5s;
-    background-color: rgba(83,91,160,1);
+    background-color: rgba(0,124,54);
     border-radius: 20px;
 }
 .filled-rounded-button a:hover {
@@ -817,15 +817,15 @@ section.buttons .container-fluid {
     width: 100%;
     text-align: center;
     letter-spacing: 0.5px;
-    color: #535ba0;
-    border: 2px solid #535ba0;
+    color:#007C36;
+    border: 2px solid #007C36;
     transition: all 0.5s;
     background-color: rgba(83,91,160,0.0);
     border-radius: 20px;
 }
 .border-rounded-button a:hover {
     color: #fff;
-    background-color: rgba(83,91,160,1);
+    background-color: rgba(0,124,54);
 }
 
 .filled-icon-button {
@@ -844,9 +844,9 @@ section.buttons .container-fluid {
     text-align: center;
     letter-spacing: 0.5px;
     color: #fff;
-    border: 2px solid #535ba0;
+    border: 2px solid#007C36;
     transition: all 0.5s;
-    background-color: rgba(83,91,160,1);
+    background-color: rgba(0,124,54);
     border-radius: 20px;
 }
 .filled-icon-button a:hover {
@@ -869,15 +869,15 @@ section.buttons .container-fluid {
     width: 100%;
     text-align: center;
     letter-spacing: 0.5px;
-    color: #535ba0;
-    border: 2px solid #535ba0;
+    color:#007C36;
+    border: 2px solid #007C36;
     transition: all 0.5s;
     background-color: rgba(83,91,160,0.0);
     border-radius: 20px;
 }
 .border-icon-button a:hover {
     color: #fff;
-    background-color: rgba(83,91,160,1);
+    background-color: rgba(0,124,54);
 }
 
 /* Page Heading */
@@ -929,7 +929,7 @@ section.buttons .container-fluid {
     -webkit-transition: margin-left 0.5s ease, box-shadow 0.5s ease;
     -ms-transition: margin-left 0.5s ease, box-shadow 0.5s ease;
     transition: margin-left 0.5s ease, box-shadow 0.5s ease;
-    background-color: #305680;
+    background-color: #007C36;
     position: relative;
     width: 1000px;
 }
@@ -941,7 +941,7 @@ section.buttons .container-fluid {
 }
 
 #sidebar > .inner > #search  {
-    background-color: #305680;
+    background-color: #007C36;
     height: 100px;
     width: 280px;
     display: inline-block;
@@ -1204,7 +1204,7 @@ section.buttons .container-fluid {
     display: -ms-flex;
     display: flex;
     position: relative;
-    background-color:#305680;
+    background-color:#007C36;
     margin: -100px -100px 100px -100px;
     margin-block-end: 50px;
 }
