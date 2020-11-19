@@ -1,5 +1,5 @@
 
-from mjkeji.model import Device, Factory_area,User,Product_line,Factory_area,Device,Warning
+from mjkeji.model import Device,User,Product_line,Factory_area,Device,Warning
 from mjkeji import app,db,login_manager
 from flask import render_template, request, url_for, redirect, flash,jsonify
 from flask_login import login_user
@@ -8,7 +8,8 @@ from random import choice
 @app.route('/test',methods=['GET','POST'])
 def test():
     if request.method == 'POST':
-        print(request.values['username'],"成功")
+        user = request.values['username'] 
+        print("成功")
     return render_template('test.html')
 # 登录页面
 @app.route('/login',methods=['GET','POST'])
@@ -33,7 +34,6 @@ def login():
         flash('账号或密码错误')  # 如果验证失败，显示错误消息
         return redirect(url_for('login'))  # 重定向回登录页面
     return render_template('login.html')
-
 # 
 @app.route('/index',methods=['GET','POST'])
 def index():
@@ -58,7 +58,7 @@ def strap():
 def chain():
     return render_template('chain.html')
 @app.route('/database',methods=['GET','POST'])
-def dtatbase():
+def database():
     return render_template('database.html')
 @app.route('/plant_settings',methods=['GET','POST'])
 def plant_settings():
@@ -68,7 +68,8 @@ def plant_settings():
         db.session.add(factory)
         db.session.commit()
         db.session.close()
-    return render_template('plant_settings.html')
+    factory_area = Factory_area.query.all()
+    return render_template('plant_settings.html',fac=factory_area)
 @app.route('/device_settings',methods=['GET','POST'])
 def device_settings():
     if request.method == 'POST':
@@ -76,7 +77,6 @@ def device_settings():
         status = request.form.get('status')
         line = request.form.get('line')
         device_select = Product_line.query.filter(Product_line.name == line).first()
-        print(device_select)
         dev = Device(name = name,l_id=device_select.id,status=status)
         db.session.add(dev)
         db.session.commit()
@@ -148,6 +148,7 @@ def device():
         print('get', limit)
         print('get  offset', offset)
         return jsonify({'total': len(data), 'rows': data[int(offset):(int(offset) + int(limit))]})
+# 警告信息
 @app.route('/t_warning',methods=['GET','POST'])
 def t_warning():
     data = []
@@ -280,3 +281,61 @@ def c_warning():
         print('get', limit)
         print('get  offset', offset)
         return jsonify({'total': len(data), 'rows': data[int(offset):(int(offset) + int(limit))]})
+#  表格删除
+@app.route('/factory_delete', methods=['GET','POST'])  # 限定只接受 POST 请求
+def fac_delete():
+    id = request.values['ID']  
+    movie = Factory_area.query.get_or_404(id)  # 获取电影记录
+    db.session.delete(movie)  # 删除对应的记录
+    db.session.commit()  # 提交数据库会话
+    return redirect(url_for('plant_settings'))  # 重定向回主页
+@app.route('/line_delete', methods=['GET','POST'])  # 限定只接受 POST 请求
+def line_delete():
+    id = request.values['ID']  
+    movie = Product_line.query.get_or_404(id)  # 获取电影记录
+    db.session.delete(movie)  # 删除对应的记录
+    db.session.commit()  # 提交数据库会话
+    return redirect(url_for('production_line_settings'))  # 重定向回主页
+@app.route('/dev_delete', methods=['GET','POST'])  # 限定只接受 POST 请求
+def dev_delete():
+    id = request.values['ID']  
+    movie = Device.query.get_or_404(id)  # 获取电影记录
+    db.session.delete(movie)  # 删除对应的记录
+    db.session.commit()  # 提交数据库会话
+    return redirect(url_for('device_settings'))  # 重定向回主页
+# 修改表格中的数据
+@app.route('/dev_set', methods=['GET','POST'])  # 限定只接受 POST 请求
+def dev_set():
+    id = request.values['ID']
+    name = request.values['dev_n']
+    zt = request.values['dev_z']
+    for_line = request.values['for_line']
+    device_select = Product_line.query.filter(Product_line.name == for_line).first()
+    num = device_select.id
+    movie = Device.query.get_or_404(id)  # 获取电影记录
+    movie.name = name
+    movie.status = zt
+    movie.l_id = num
+    db.session.commit()  # 提交数据库会话
+    return redirect(url_for('device_settings'))  # 重定向回主页
+@app.route('/plant_set', methods=['GET','POST'])  # 限定只接受 POST 请求
+def plant_set():
+    id = request.values['ID']
+    name = request.values['dev_n']
+    plant = Factory_area.query.get_or_404(id)  # 获取电影记录
+    plant.name = name
+    db.session.commit()  # 提交数据库会话
+    return redirect(url_for('plant_settings'))  # 重定向回主页
+@app.route('/line_set', methods=['GET','POST'])  # 限定只接受 POST 请求
+def line_set():
+    print("成功")
+    id = request.values['ID']
+    name = request.values['dev_n']
+    for_factory = request.values['for_factory']
+    line_select = Factory_area.query.filter(Factory_area.name == for_factory).first()
+    num = line_select.id
+    line = Product_line.query.get_or_404(id)  # 获取电影记录
+    line.name = name
+    line.f_id = num
+    db.session.commit()  # 提交数据库会话
+    return redirect(url_for('device_settings'))  # 
