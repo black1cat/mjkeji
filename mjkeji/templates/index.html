@@ -40,30 +40,75 @@
 {% block script %}
 <script type="text/javascript">
   // 基于准备好的dom，初始化echarts实例
-  var myChart = echarts.init(document.getElementById('temperature'));
+  // var myChart = echarts.init(document.getElementById('temperature'));
 
-  // 指定图表的配置项和数据
-  var option1 = {
-    title: {
-      text: '温度'
-    },
-    tooltip: {},
-    legend: {
-      data:['温度']
-    },
-    xAxis: {
-      data: ["0时","3时","6时","9时","12时","15时","18时","21时","24时"]
-    },
-    yAxis: {},
-    series: [{
-      name: '温度',
-      type: 'line',
-      data: [5, 20, 36, 10, 10, 20,24,3,56]
-    }]
-  };
-  // 使用刚指定的配置项和数据显示图表。
-  myChart.setOption(option1);
- 
+  // // 指定图表的配置项和数据
+  // var option1 = {
+  //   title: {
+  //     text: '温度'
+  //   },
+  //   tooltip: {},
+  //   legend: {
+  //     data:['温度']
+  //   },
+  //   xAxis: {
+  //     data: ["0时","3时","6时","9时","12时","15时","18时","21时","24时"]
+  //   },
+  //   yAxis: {},
+  //   series: [{
+  //     name: '温度',
+  //     type: 'line',
+  //     data: [5, 20, 36, 10, 10, 20,24,3,56]
+  //   }]
+  // };
+  // // 使用刚指定的配置项和数据显示图表。
+  // myChart.setOption(option1);
+  var myChart = echarts.init(document.getElementById('temperature'));
+    var app ={
+      xdata:[],
+      yvalue:[]
+    };
+    $(document).ready(function(){
+      getData();
+      console.log(app.xdata)
+      console.log(app.yvalue)
+    });
+    function getData() {
+      $.ajax({
+        url:'echarts_tem',
+        data:{},
+        type:'POST',
+        async:false,
+        data:'json',
+        success:function(data){
+          app.xdata = data.xtime;
+          app.yvalue = data.yv;
+          myChart.setOption({
+            title: {
+              text: '温度'
+            },
+            tooltip: {},
+            legend: {
+              data:['温度']
+            },
+            xAxis: {
+              data: app.xdata
+            },
+            yAxis: {},
+            series: [{
+              name: '温度',
+              type: 'line',
+              data: app.yvalue
+            }]
+          })
+        },
+        error:function (msg) {
+                alert(msg)
+                console.log(msg);
+                alert('系统发生错误');
+            }
+      })
+    }
 
 </script>
 {% endblock %}
