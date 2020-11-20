@@ -1125,7 +1125,7 @@ section.buttons .container-fluid {
     	background-color: transparent;
     }
     #sidebar .toggle:after {
-        background: rgba(83, 91, 160, 0.90);
+        background: rgba(0,124,54);
         border-radius: 5px;
         content: '';
         height: 60px;
@@ -1242,7 +1242,7 @@ section.buttons .container-fluid {
 
 /* Menu */
 #menu {
-	margin-top: 50px;
+	margin-top: 40px;
 }
 
 #menu ul {
@@ -1311,6 +1311,7 @@ section.buttons .container-fluid {
     content: '\f078';
     position: absolute;
     right: 0;
+    margin-top: 10px;
 }
 
 #menu ul a.opener:hover:before,
@@ -1332,7 +1333,7 @@ section.buttons .container-fluid {
 }
 
 #menu > ul > li {
-    border-top: solid 1px #1a1b20;
+    border-top: solid 1px #f6f6f8;
     margin: 0.5em 0 0 0;
     padding: 0.5em 0 0 0;
 }

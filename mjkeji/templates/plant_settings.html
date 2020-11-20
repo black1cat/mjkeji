@@ -10,7 +10,7 @@
     <div id="toolbar" class="row container-fluid">
         <div class="form-inline">
             <div class="form-group">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">添加</button>
+              <button type="button" class="btn btn-primary m-r-5" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" ><i class="mdi mdi-plus"></i> 添加</button>
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -124,8 +124,8 @@ var plant_id;
               align: 'center',
               formatter: function (value, row, index) {
                 
-                   var e = '<button class="btn btn-success btn-sm" onclick="xiu(\'' + row.id + '\')" data-toggle="modal" data-target="#xampleModal" data-whatever="@mdo">修改</button>';  //row.id为每行的id
-                   var d = '<button class="btn btn-warning btn-sm" onclick="del(\'' + row.id + '\')">删除</button>';
+                   var e = '<button  style="padding: 6px 12px;" class="btn btn-success btn-sm" onclick="xiu(\'' + row.id + '\')" data-toggle="modal" data-target="#xampleModal" data-whatever="@mdo"><i class="mdi mdi-pencil"></i> 修改</button>';  //row.id为每行的id
+                   var d = '<button style="padding: 6px 12px;" class="btn btn-danger btn-sm" onclick="del(\'' + row.id + '\')"><i class="mdi mdi-window-close"></i> 删除</button>';
                   return e+d;
               }
           }

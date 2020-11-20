@@ -67,7 +67,7 @@
   });
   $(function () {
     $('#huan').bootstrapTable({
-        url: '/n_warning',  // 请求数据源的路由
+        url: '/h_warning',  // 请求数据源的路由
         method:'GET' ,
         dataType: "json",
         sortable: true, //是否启用排序
@@ -129,7 +129,7 @@
 });
 $(function () {
   $('#zao').bootstrapTable({
-      url: '/s_warning',  // 请求数据源的路由
+      url: '/n_warning',  // 请求数据源的路由
       method:'GET' ,
       dataType: "json",
       sortable: true, //是否启用排序

@@ -8,9 +8,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet"> -->
+    
+    <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="static/assets/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="static/assets/css/style.min.css" rel="stylesheet">
-    <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="static/assets/css/base_page.css" rel="stylesheet">
     <!-- <link href="{{url_for('static',filename='vendor/jquery-treegrid/css/jquery-treegrid.css')}}" rel="stylesheet"></link> -->
     <link rel="stylesheet" href="{{url_for('static',filename='vendor/bootstrap-table/bootstrap-table.css')}}">
@@ -71,18 +72,18 @@
               </form> -->
                 <div class="logo">
                   
-                  <img src="static/assets/images/logo.jpg" style="height: 110px;width: 250px;margin-top: 0;" >
+                  <img src="static/assets/images/logo.jpg" style="height: 100px;width: 250px;" >
                 </div>
             </section>
             <!-- Menu -->
             <nav id="menu">
               <ul>
-                <li><a href="index"><span class="glyphicon glyphicon-stats" aria-hidden="true">  数据采集</span></a></li>
+                <li class="nav-item active"><a href="index"><span class="glyphicon glyphicon-stats" aria-hidden="true">  数据采集</span></a></li>
                 <li><a href="simple_page"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true">  异常检测</span></a></li>
                 <li><a href="shortcodes"><span class="glyphicon glyphicon-signal" aria-hidden="true">  数据展示</span></a></li>
-                <li>
-                  <span class="opener"><span class="glyphicon glyphicon-asterisk" aria-hidden="true">  系统设置</span></span>
-                  <ul>
+                <li class="nav-item nav-item-has-subnav">
+                <span class="opener" style="margin-top: 0px;"><span class="glyphicon glyphicon-asterisk" aria-hidden="true">  系统设置</span></span>
+                  <ul> 
                     <li><a href="plant_settings" class='active'>厂区设置</a></li>
                     <li><a href="production_line_settings">生产线设置</a></li>
                     <li><a href="device_settings">设备设置</a></li>

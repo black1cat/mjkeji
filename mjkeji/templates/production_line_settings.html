@@ -10,19 +10,19 @@
     <label for="sel1">厂区选择</label>
     <select class="form-control" id="sel1" >
       {% for fac in factory_area %}
-      <option>{{ fac.name }}</option>
+      <option value = {{fac.id}}>{{ fac.name }}</option>
       {% endfor %}
     </select>
   </div>
   <br>
-  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<button class="btn btn-info" id="start">确认</button>
+  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<button type="button" class="btn btn-info" onclick="st()" id="start">确认</button>
 </form>
   <section></section>
 <div class="container-fluid">
   <div id="toolbar" class="row container-fluid">
     <div class="form-inline">
         <div class="form-group">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">添加</button>
+            <button type="button" class="btn btn-primary m-r-5" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" ><i class="mdi mdi-plus"></i> 添加</button>
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -91,11 +91,35 @@
 
 <script type="text/javascript">
 var line_id;
+var f_id = 1;
+function st() {
+    f_id = $("#sel1").val() ;
+
   $(function () {
+    $("#table").bootstrapTable("destroy");
       $('#table').bootstrapTable({
+    //       ajax: function(request){
+    //         $.ajax({
+    //           type:"GET",
+    //           url:'/product_line',
+    //           contentType: "application/json;charset=utf-8",
+    //           dataType: "json",
+    //           data:{ID = f_id},
+    //           success : function (msg) {            
+    //     result.success({
+    //         row:msg
+    //     });
+    //     $('#table').bootstrapTable('load', msg);
+    // },  
+    // error:function(msg){  
+    //     alert("错误");  
+    // }  
+    //         });
+    //       },
           url: '/product_line',  // 请求数据源的路由
           method:'GET' ,
           dataType: "json",
+          queryParams:{ f_id:f_id },
           sortable: true, //是否启用排序
           sortOrder: "asc", //排序方式
           pagination: true, //前端处理分页
@@ -116,6 +140,10 @@ var line_id;
           showToggle: true, //是否显示详细视图和列表视图的切换按钮
           cardView: false, //是否显示详细视图
           sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
+          showToggle: false, //是否显示详细视图和列表视图的切换按钮
+          cardView: false, //是否显示详细视图
+          detailView: false, //是否显示父子表
+          clickToSelect: true,
           columns: [{  //定义表头,这个表头必须定义,下边field后边跟的字段名字必须与后端传递的字段名字相同.如:id、name、price 跟后端的字段名id  name price是完全一样的.
 
               field: 'id',
@@ -136,19 +164,97 @@ var line_id;
               align: 'center',
               formatter: function (value, row, index) {
                 
-                var e = '<button class="btn btn-success btn-sm" onclick="xiu(\'' + row.id + '\')" data-toggle="modal" data-target="#xampleModal" data-whatever="@mdo">修改</button>';  //row.id为每行的id
-                var d = '<button class="btn btn-warning btn-sm" onclick="del(\'' + row.id + '\')">删除</button>';
+                var e = '<button  style="padding: 6px 12px;" class="btn btn-success btn-sm" onclick="xiu(\'' + row.id + '\')" data-toggle="modal" data-target="#xampleModal" data-whatever="@mdo"><i class="mdi mdi-pencil"></i> 修改</button>';  //row.id为每行的id
+                var d = '<button style="padding: 6px 12px;" class="btn btn-danger btn-sm" onclick="del(\'' + row.id + '\')"><i class="mdi mdi-window-close"></i> 删除</button>';
                 return e+d;
               }
           }
           ],
       });
   });
+}
+$(function () {
+    $("#table").bootstrapTable("destroy");
+      $('#table').bootstrapTable({
+    //       ajax: function(request){
+    //         $.ajax({
+    //           type:"GET",
+    //           url:'/product_line',
+    //           contentType: "application/json;charset=utf-8",
+    //           dataType: "json",
+    //           data:{ID = f_id},
+    //           success : function (msg) {            
+    //     result.success({
+    //         row:msg
+    //     });
+    //     $('#table').bootstrapTable('load', msg);
+    // },  
+    // error:function(msg){  
+    //     alert("错误");  
+    // }  
+    //         });
+    //       },
+          url: '/product_line',  // 请求数据源的路由
+          method:'GET' ,
+          dataType: "json",
+          queryParams:{ f_id:f_id },
+          sortable: true, //是否启用排序
+          sortOrder: "asc", //排序方式
+          pagination: true, //前端处理分页
+          singleSelect: false,//是否只能单选
+          search: true, //显示搜索框，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+          toolbar: '#toolbar', //工具按钮用哪个容器
+          striped: true, //是否显示行间隔色
+          cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+          pageNumber: 1, //初始化加载第10页，默认第一页
+          pageSize: 10, //每页的记录行数（*）
+          pageList: [10, 20, 50, 100], //可供选择的每页的行数（*）
+          strictSearch: true,//设置为 true启用 全匹配搜索，false为模糊搜索
+          showColumns: true, //显示内容列下拉框
+          showRefresh: true, //显示刷新按钮
+          minimumCountColumns: 2, //当列数小于此值时，将隐藏内容列下拉框
+          clickToSelect: true, //设置true， 将在点击某行时，自动勾选rediobox 和 checkbox
+          uniqueId: "id", //每一行的唯一标识，一般为主键列
+          showToggle: true, //是否显示详细视图和列表视图的切换按钮
+          cardView: false, //是否显示详细视图
+          sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
+          showToggle: false, //是否显示详细视图和列表视图的切换按钮
+          cardView: false, //是否显示详细视图
+          detailView: false, //是否显示父子表
+          clickToSelect: true,
+          columns: [{  //定义表头,这个表头必须定义,下边field后边跟的字段名字必须与后端传递的字段名字相同.如:id、name、price 跟后端的字段名id  name price是完全一样的.
+
+              field: 'id',
+              title: '生产线序号',
+              align: 'center',
+              valign: 'middle',  //对齐方式，居中
+              width: '200px'  // 可以写各种样式#}
+
+          }, {
+              field: 'name',
+              title: '生产线名称',
+              valign: 'middle',
+              align: 'center'
+          }, {
+              title: '操作',
+              field: 'id',
+              valign: 'middle',
+              align: 'center',
+              formatter: function (value, row, index) {
+                
+                var e = '<button  style="padding: 6px 12px;" class="btn btn-success btn-sm" onclick="xiu(\'' + row.id + '\')" data-toggle="modal" data-target="#xampleModal" data-whatever="@mdo"><i class="mdi mdi-pencil"></i> 修改</button>';  //row.id为每行的id
+                var d = '<button style="padding: 6px 12px;" class="btn btn-danger btn-sm" onclick="del(\'' + row.id + '\')"><i class="mdi mdi-window-close"></i> 删除</button>';
+                return e+d;
+              }
+          }
+          ],
+      });
+  });
+
   function xiu(id) {
     line_id = id ;
-    
-
 }
+
   function del(id) {
     var r = confirm("是否删除该生产线信息");
     if (r) {
