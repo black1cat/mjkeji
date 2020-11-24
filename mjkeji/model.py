@@ -1,10 +1,10 @@
 
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import UserMixin
-
-from mjkeji import db
+from flask_migrate import Migrate
+from mjkeji import app,db
 # 用户
-
+migrate = Migrate(app, db)
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -96,6 +96,12 @@ class Warning(db.Model):
     type = db.Column(db.String(128))
     warn_data = db.Column(db.String(900))
 
+class Twarning(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    time = db.Column(db.DateTime)
+    device = db.Column(db.String(128))
+    type = db.Column(db.String(128))
+    warn_data = db.Column(db.String(900))
 
 class Hwarning(db.Model):
     id = db.Column(db.Integer, primary_key=True)

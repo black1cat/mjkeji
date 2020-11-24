@@ -1,24 +1,8 @@
 {% extends 'base.html' %}
     {% block head%}
+    <link rel="stylesheet" href="{{url_for('static',filename='assets/css/simple_page.css')}}">
     <style type="text/css">
-      #dituContent {width:550px;height:550px;border:#ccc solid 1px;float: left;}
-      #roll{background: url(static/assets/images/bg_error.png) no-repeat;height: 550px;}
-      .messageWrap{
-      bottom:0;
-      width:100%;
-      padding:0 0.2rem;
-      overflow:hidden;
-      }
-      .message{
-        width:100%;
-        background:#fff;
-        border-top-left-radius: 0px;
-        border-top-right-radius: 0px;
-        height:100%;
-        overflow:hidden;
-        padding-left:0.2rem;
-      }
-      .message li{
+    .message li{
         line-height:2rem;
         list-style-type:none;
         list-style-image: url(static/assets/images/tanhao.png); 
@@ -26,14 +10,7 @@
         margin-bottom: 2px;
         
       }
-      .simple-post{height: 600px;margin-top: 0;}
-      #warning{margin: 0;padding-top: 0;}
-      #rollbox {margin:5px 0px;padding:10px 0px;}
-      #banner{float:left;margin-left:30px;padding:10px;width:100px;height:200px;background: url(static/assets/images/history.png);}
-      #top_image{margin-top: 0;}
-      #notice span{float:right}
-      #form-group{margin-top: 100px;}
-    </style>
+      </style>
     {% endblock  %}
 
 {% block content %}
@@ -52,11 +29,11 @@
                     <div class="container-fluid">
                       <div class="row">
                         <div class="col-md-12" >
-                          <div  id="dituContent"></div>
+                          <div class="col-md-4"  id="dituContent"></div>
                           <div class="col-md-4" id="roll">
                             <div class="messageWrap borderBox" id="rollbox">
                               
-                              <div class="message borderBox">
+                              <div class="col-md-12 message borderBox">
                                   <ul id="notice">
                                     <li><a href="#">检测点一温度警告</a><span>2020-10-31</span></li>
                                     <li><a href="#">检测点二湿度警告</a><span>2020-10-31</span></li>
@@ -81,7 +58,7 @@
                             </div>
                               
                           </div>
-                          <div id="banner"></div>
+                          <!-- <div id="banner"></div> -->
                         </div>
                       </div>
                       
@@ -98,11 +75,11 @@
                         <div >
                           
                           <ul class="nav nav-tabs nav-pills" role="tablist">
-                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">温度警报</a></li>
-                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">环境警报</a></li>
-                            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">噪声警报</a></li>
-                            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">皮带警报</a></li>
-                            <li role="presentation"><a href="#a" aria-controls="settings" role="tab" data-toggle="tab">链条警报</a></li>
+                            <li role="presentation" class="active"><a href="#ttem" aria-controls="home" role="tab" data-toggle="tab">温度警报</a></li>
+                            <li role="presentation"><a href="#huanjing" aria-controls="profile" role="tab" data-toggle="tab">环境警报</a></li>
+                            <li role="presentation"><a href="#noise" aria-controls="messages" role="tab" data-toggle="tab">噪声警报</a></li>
+                            <li role="presentation"><a href="#pd" aria-controls="settings" role="tab" data-toggle="tab">皮带警报</a></li>
+                            <li role="presentation"><a href="#liantiao" aria-controls="settings" role="tab" data-toggle="tab">链条警报</a></li>
                           </ul>
                           </div>
                           
@@ -119,29 +96,29 @@
                     </div> 
                     
                   </div>
-                  <div class="tab-content"><div role="tabpanel" class="tab-pane active" id="home">
+                  <div class="tab-content"><div role="tabpanel" class="tab-pane active" id="ttem">
                     <div class="tables">
                     <div class="col-sm-12">
                         <table id="tem"></table>
                     </div>
                   </div> 
                 </div> 
-                  <div role="tabpanel" class="tab-pane" id="profile"> <div class="tables">
+                  <div role="tabpanel" class="tab-pane" id="huanjing"> <div class="tables">
                     <div class="col-sm-12">
                         <table id="huan"></table>
                     </div>
                   </div></div>
-                  <div role="tabpanel" class="tab-pane" id="messages"> <div class="tables">
+                  <div role="tabpanel" class="tab-pane" id="noise"> <div class="tables">
                     <div class="col-sm-12">
                         <table id="zao"></table>
                     </div>
                   </div></div>
-                  <div role="tabpanel" class="tab-pane" id="settings"> <div class="tables">
+                  <div role="tabpanel" class="tab-pane" id="pd"> <div class="tables">
                     <div class="col-sm-12">
-                        <table id="pidai"></table>
+                        <table id="pid"></table>
                     </div>
                   </div></div>
-                  <div role="tabpanel" class="tab-pane" id="a"> <div class="tables">
+                  <div role="tabpanel" class="tab-pane" id="liantiao"> <div class="tables">
                     <div class="col-sm-12">
                         <table id="lian"></table>
                     </div>

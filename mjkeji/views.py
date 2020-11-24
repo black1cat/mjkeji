@@ -1,5 +1,5 @@
 
-from mjkeji.model import Abient, Device, Machine_temperature, Noise, User, Product_line, Factory_area, Device, Warning
+from mjkeji.model import Abient, Cwarning, Device, Hwarning, Machine_temperature, Noise, Nwarning, Swarning, Twarning, User, Product_line, Factory_area, Device, Warning
 from mjkeji import app, db, login_manager
 from flask import render_template, request, url_for, redirect, flash, jsonify
 from flask_login import login_user
@@ -40,7 +40,7 @@ def login():
 #
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-    data = Machine_temperature.query.all()
+    data = Product_line.query.all()
     return render_template('index.html', data=data)
 
 
@@ -56,11 +56,9 @@ def shortcodes():
     return render_template('shortcodes.html', line=line)
 @app.route('/shortcodes_table_ptem',methods=['GET','POST'])
 def shortcodes_table_ptem():
-     # id = request.values['f_id']
+    id = request.values['sel1']
     data = []
-    # names  = Product_line.query.filter(Product_line.f_id == id).all()
-    tem = Abient.query.all()
-    print(tem)
+    tem = Abient.query.filter(Abient.p_id == id).all()
     for i in tem:
         d = {}
         d['id'] = i.id
@@ -76,11 +74,9 @@ def shortcodes_table_ptem():
         return jsonify({'total': len(data), 'rows': data[int(offset):(int(offset) + int(limit))]})
 @app.route('/shortcodes_table_hum',methods=['GET','POST'])
 def shortcodes_table_hum():
-     # id = request.values['f_id']
+    id = request.values['sel1']
     data = []
-    # names  = Product_line.query.filter(Product_line.f_id == id).all()
-    tem = Abient.query.all()
-    print(tem)
+    tem = Abient.query.filter(Abient.p_id == id).all()
     for i in tem:
         d = {}
         d['id'] = i.id
@@ -96,10 +92,9 @@ def shortcodes_table_hum():
         return jsonify({'total': len(data), 'rows': data[int(offset):(int(offset) + int(limit))]})
 @app.route('/shortcodes_table_tem',methods=['GET','POST'])
 def shortcodes_table_tem():
-     # id = request.values['f_id']
+    id = request.values['sel1']
     data = []
-    # names  = Product_line.query.filter(Product_line.f_id == id).all()
-    tem = Machine_temperature.query.all()
+    tem = Machine_temperature.query.filter(Machine_temperature.p_id == id).all()
     for i in tem:
         d = {}
         d['id'] = i.id
@@ -115,10 +110,9 @@ def shortcodes_table_tem():
         return jsonify({'total': len(data), 'rows': data[int(offset):(int(offset) + int(limit))]})
 @app.route('/shortcodes_table_no',methods=['GET','POST'])
 def shortcodes_table_no():
-     # id = request.values['f_id']
+    id = request.values['sel1']
     data = []
-    # names  = Product_line.query.filter(Product_line.f_id == id).all()
-    tem = Noise.query.all()
+    tem = Noise.query.filter(Noise.p_id == id).all()
     for i in tem:
         d = {}
         d['id'] = i.id
@@ -263,13 +257,14 @@ def device():
 @app.route('/t_warning', methods=['GET', 'POST'])
 def t_warning():
     data = []
-    for i in range(11):
+    database_data = Twarning.query.all()
+    for i in database_data:
         d = {}
-        d['id'] = i
-        d['time'] = "2020.10.1"  # 随机选取汉字并拼接
-        d['device'] = "温度计"
-        d['type'] = "温度异常"
-        d['warn_data'] = "温度过高"
+        d['id'] = i.id
+        d['time'] = i.time # 随机选取汉字并拼接
+        d['device'] = i.device
+        d['type'] = i.type
+        d['warn_data'] = i.warn_data
         data.append(d)
 
     print(data)
@@ -288,16 +283,15 @@ def t_warning():
 def h_warning():
 
     data = []
-    for i in range(11):
+    db_base = Hwarning.query.all()
+    for i in db_base:
         d = {}
-        d['id'] = i
-        d['time'] = "2020.10.1"  # 随机选取汉字并拼接
-        d['device'] = "温度计"
-        d['type'] = "温度异常"
-        d['warn_data'] = "温度过高"
+        d['id'] = i.id
+        d['time'] = i.time # 随机选取汉字并拼接
+        d['device'] = i.device
+        d['type'] = i.type
+        d['warn_data'] = i.warn_data
         data.append(d)
-
-    print(data)
     if request.method == 'POST':
         print('post')
     if request.method == 'GET':
@@ -312,16 +306,15 @@ def h_warning():
 @app.route('/n_warning', methods=['GET', 'POST'])
 def n_warning():
     data = []
-    for i in range(11):
+    db_base = Nwarning.query.all()
+    for i in db_base:
         d = {}
-        d['id'] = i
-        d['time'] = "2020.10.1"  # 随机选取汉字并拼接
-        d['device'] = "噪声传感器"
-        d['type'] = "频率"
-        d['warn_data'] = "频率过高"
+        d['id'] = i.id
+        d['time'] = i.time # 随机选取汉字并拼接
+        d['device'] = i.device
+        d['type'] = i.type
+        d['warn_data'] = i.warn_data
         data.append(d)
-
-    print(data)
     if request.method == 'POST':
         print('post')
     if request.method == 'GET':
@@ -336,16 +329,15 @@ def n_warning():
 @app.route('/s_warning', methods=['GET', 'POST'])
 def s_warning():
     data = []
-    for i in range(11):
+    db_base = Swarning.query.all()
+    for i in db_base:
         d = {}
-        d['id'] = i
-        d['time'] = "2020.10.1"  # 随机选取汉字并拼接
-        d['device'] = "皮带传感器"
-        d['type'] = "皮带异常"
-        d['warn_data'] = "温度过高"
+        d['id'] = i.id
+        d['time'] = i.time # 随机选取汉字并拼接
+        d['device'] = i.device
+        d['type'] = i.type
+        d['warn_data'] = i.warn_data
         data.append(d)
-
-    print(data)
     if request.method == 'POST':
         print('post')
     if request.method == 'GET':
@@ -360,16 +352,15 @@ def s_warning():
 @app.route('/c_warning', methods=['GET', 'POST'])
 def c_warning():
     data = []
-    for i in range(11):
+    db_base = Cwarning.query.all()
+    for i in db_base:
         d = {}
-        d['id'] = i
-        d['time'] = "2020.10.1"  # 随机选取汉字并拼接
-        d['device'] = "链条传感器"
-        d['type'] = "温度异常"
-        d['warn_data'] = "温度过高"
+        d['id'] = i.id
+        d['time'] = i.time # 随机选取汉字并拼接
+        d['device'] = i.device
+        d['type'] = i.type
+        d['warn_data'] = i.warn_data
         data.append(d)
-
-    print(data)
     if request.method == 'POST':
         print('post')
     if request.method == 'GET':

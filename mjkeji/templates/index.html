@@ -6,10 +6,9 @@
                   <div class="form-group col-md-3">
                     <label for="sel1">生产线</label>
                     <select class="form-control" id="sel1" >
-                      <option>生产线1</option>
-                      <option>生产线2</option>
-                      <option>生产线3</option>
-                      <option>生产线4</option>
+                      {% for i in data %}
+                      <option>{{ i.name }}</option>
+                      {% endfor %}
                     </select>
                   </div>
                   <br>
@@ -29,7 +28,12 @@
                 <div class="container-fluid">
                   <div class="row">
                     <div class="col-md-6">
-                      <div id="temperature" style="width: 600px;height:350px;"></div>
+                      <div class="tab-content">
+                       
+                       
+                        <div id="temperature" style="width: 600px;height:350px;"></div>
+                      </div>
+                      
                     </div>
                 
                   </div>
@@ -38,6 +42,7 @@
               </div>
 {% endblock %}  
 {% block script %}
+<script src='static/assets/js/simple_page_table.js'></script>
 <script type="text/javascript">
   // 基于准备好的dom，初始化echarts实例
   // var myChart = echarts.init(document.getElementById('temperature'));
