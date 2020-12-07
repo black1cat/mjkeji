@@ -176,24 +176,6 @@ function st() {
 $(function () {
     $("#table").bootstrapTable("destroy");
     $('#table').bootstrapTable({
-    //       ajax: function(request){
-    //         $.ajax({
-    //           type:"GET",
-    //           url:'/product_line',
-    //           contentType: "application/json;charset=utf-8",
-    //           dataType: "json",
-    //           data:{ID = f_id},
-    //           success : function (msg) {            
-    //     result.success({
-    //         row:msg
-    //     });
-    //     $('#table').bootstrapTable('load', msg);
-    // },  
-    // error:function(msg){  
-    //     alert("错误");  
-    // }  
-    //         });
-    //       },
           url: '/product_line',  // 请求数据源的路由
           method:'GET' ,
           dataType: "json",

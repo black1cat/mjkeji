@@ -60,7 +60,7 @@ class Belt(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     time = db.Column(db.DateTime)
     p_id = db.Column(db.Integer)
-    tension = db.Column(db.Boolean)
+    tension = db.Column(db.Integer)
 
 # 链条
 
@@ -69,8 +69,13 @@ class Chain(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     time = db.Column(db.DateTime)
     p_id = db.Column(db.Integer)
-    tension = db.Column(db.Boolean)
-
+    tension = db.Column(db.Integer)
+# 电机电流
+class Motor_current(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    time = db.Column(db.DateTime)
+    p_id = db.Column(db.Integer)
+    A = db.Column(db.Integer)
 # 厂区
 
 

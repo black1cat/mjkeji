@@ -23,6 +23,7 @@
                 <li role="presentation"><a href="noise">噪声情况</a></li>
                 <li role="presentation"><a href="strap">皮带情况</a></li>
                 <li role="presentation" class='active'><a href="chain">链条情况</a></li>
+                <li role="presentation"><a href="motor_current">电机电流</a></li>
               </ul>
               </div>
             
@@ -40,31 +41,98 @@
  {% endblock %}
  {% block script %}
 <script type="text/javascript">
-  // 基于准备好的dom，初始化echarts实例
-  var myChart = echarts.init(document.getElementById('temperature'));
 
-  // 指定图表的配置项和数据
-  var option1 = {
-    title: {
-      text: '频率'
-    },
-    tooltip: {},
-    legend: {
-      data:['频率']
-    },
-    xAxis: {
-      data: ["0时","3时","6时","9时","12时","15时","18时","21时","24时"]
-    },
-    yAxis: {},
-    series: [{
-      name: '频率',
-      type: 'line',
-      data: [5, 20, 36, 10, 10, 20,24,3,56]
-    }]
-  };
-  // 使用刚指定的配置项和数据显示图表。
-  myChart.setOption(option1);
- 
+  var myChart = echarts.init(document.getElementById('temperature'));
+    var app ={
+      xdata:[],
+      yvalue:[]
+    };
+    $(document).ready(function(){
+      getData();
+      console.log(app.xdata)
+      console.log(app.yvalue)
+    });
+    function getData() {
+      $.ajax({
+        url:'echarts_c',
+        data:{},
+        type:'POST',
+        async:false,
+        data:'json',
+        success:function(data){
+          app.xdata = data.xtime;
+          app.yvalue = data.yv;
+          myChart.setOption({
+            title: {
+              text: '频率'
+            },
+            tooltip: {},
+            legend: {
+              data:['频率']
+            },
+            xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: app.xdata
+            },
+            yAxis: {
+              type:'value',
+              axisLabel:{
+                formatter:'{value}HZ'
+              },
+              min:0,
+              max:60,
+              splitLine:{
+                line:3,
+                lineStyle:{
+
+                  color:['#aaa', '#ddd']
+                }
+              },
+            },
+            series: [{
+              name: '频率',
+              type: 'line',
+              data: app.yvalue,
+              smooth:true,
+              markLine: {
+                // animation = true,
+                data : [{
+                
+                silent:true,             //鼠标悬停事件  true没有，false有
+                    label:{
+                    position:'end', //end对应的值显示在警戒线的后面，start显示在前面（y轴上）
+                    formatter:"低温预警"  //和y轴对应的数值
+                },
+                yAxis:5         // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
+               
+            },
+            {
+                
+                silent:true,             //鼠标悬停事件  true没有，false有
+                    label:{
+                    position:'end', //end对应的值显示在警戒线的后面，start显示在前面（y轴上）
+                    formatter:"高温预警"  //和y轴对应的数值
+                },
+                yAxis:35         // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
+               
+            },
+            ]
+            },
+              itemStyle : {  
+                            
+            },
+              areaStyle: {}
+            }]
+          })
+        },
+        error:function (msg) {
+                alert(msg)
+                console.log(msg);
+                alert('系统发生错误');
+            }
+      })
+    }
 
 </script>
 {% endblock %}

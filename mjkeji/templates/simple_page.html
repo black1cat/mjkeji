@@ -134,4 +134,36 @@
     <script type="text/javascript" src="static/assets/js/map.js"></script>
     <script type="text/javascript" src="static/assets/js/roll.js"></script>
     <script type="text/javascript" src="static/assets/js/simple_page_table.js"></script>
+    <script>
+      function sendRequest(){
+      $.ajax({
+        url: "error_tan",                            //ajax跳转的action
+        type:"get",   //提交类型     
+        success:function(data){    //对应返回值得处理一般根据具体情况来定，最好的处理方式时，在页面调断点看返回值得结构，如下图 
+          if(data == '1'){
+            swal({
+            title: "温度警告",
+            text: "机器温度过高",
+            type: "error",
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "解决",
+            closeOnConfirm: false
+        }, function() {
+            swal("温度正常", "问题已经解决","success")
+        })
+    
+          }
+        },
+    
+        error:function(){
+          alert("ajax请求失败！");
+        }
+      });
+    
+    }
+    
+    $(function () {       //加载页面的时候就会调用定时刷新
+      setInterval("sendRequest()", 1000);      //每隔1秒刷新点击量 
+    });
+    </script>
     {% endblock %}

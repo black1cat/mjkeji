@@ -1,5 +1,5 @@
 
-from mjkeji.model import Abient, Cwarning, Device, Hwarning, Machine_temperature, Noise, Nwarning, Swarning, Twarning, User, Product_line, Factory_area, Device, Warning
+from mjkeji.model import Abient, Belt, Chain, Cwarning, Device, Hwarning, Machine_temperature, Motor_current, Noise, Nwarning, Swarning, Twarning, User, Product_line, Factory_area, Device, Warning
 from mjkeji import app, db, login_manager
 from flask import render_template, request, url_for, redirect, flash, jsonify
 from flask_login import login_user
@@ -8,12 +8,13 @@ from random import choice
 @app.route('/test', methods=['GET', 'POST'])
 def test():
     return render_template('test.html')
-
-
-@app.route('/test1', methods=['GET', 'POST'])
+@app.route('/test1', methods=['POST'])
 def test1():
-    a = Machine_temperature.query.all()
-    return a
+    data = request.json        # 获取 JOSN 数据
+    ti = data.get('time')
+    te = data.get('tem') 
+    print(ti,te)
+    return render_template('test.html')
 # 登录页面
 @app.route('/login', methods=['GET', 'POST'])
 @app.route('/', methods=['GET', 'POST'])
@@ -32,11 +33,9 @@ def login():
         if username == user.username and user.validate_password(password):
             login_user(user)  # 登入用户
             flash('登陆成功')
-            return render_template('index.html')  # 重定向到主页
-
-        flash('账号或密码错误')  # 如果验证失败，显示错误消息
+            return redirect(url_for('index'))  #       flash('账号或密码错误')  # 如果验证失败，显示错误消息
         return redirect(url_for('login'))  # 重定向回登录页面
-    return render_template('login.html')
+    return render_template('login_2.html')
 #
 @app.route('/index', methods=['GET', 'POST'])
 def index():
@@ -52,9 +51,11 @@ def simple_page():
 @app.route('/shortcodes', methods=['GET', 'POST'])
 def shortcodes():
     line = Product_line.query.all()
-    
+
     return render_template('shortcodes.html', line=line)
-@app.route('/shortcodes_table_ptem',methods=['GET','POST'])
+
+
+@app.route('/shortcodes_table_ptem', methods=['GET', 'POST'])
 def shortcodes_table_ptem():
     id = request.values['sel1']
     data = []
@@ -72,7 +73,9 @@ def shortcodes_table_ptem():
         limit = info.get('limit', 10)  # 每页显示的条数
         offset = info.get('offset', 0)  # 分片数，(页码-1)*limit，它表示一段数据的起点
         return jsonify({'total': len(data), 'rows': data[int(offset):(int(offset) + int(limit))]})
-@app.route('/shortcodes_table_hum',methods=['GET','POST'])
+
+
+@app.route('/shortcodes_table_hum', methods=['GET', 'POST'])
 def shortcodes_table_hum():
     id = request.values['sel1']
     data = []
@@ -90,11 +93,14 @@ def shortcodes_table_hum():
         limit = info.get('limit', 10)  # 每页显示的条数
         offset = info.get('offset', 0)  # 分片数，(页码-1)*limit，它表示一段数据的起点
         return jsonify({'total': len(data), 'rows': data[int(offset):(int(offset) + int(limit))]})
-@app.route('/shortcodes_table_tem',methods=['GET','POST'])
+
+
+@app.route('/shortcodes_table_tem', methods=['GET', 'POST'])
 def shortcodes_table_tem():
     id = request.values['sel1']
     data = []
-    tem = Machine_temperature.query.filter(Machine_temperature.p_id == id).all()
+    tem = Machine_temperature.query.filter(
+        Machine_temperature.p_id == id).all()
     for i in tem:
         d = {}
         d['id'] = i.id
@@ -108,7 +114,9 @@ def shortcodes_table_tem():
         limit = info.get('limit', 10)  # 每页显示的条数
         offset = info.get('offset', 0)  # 分片数，(页码-1)*limit，它表示一段数据的起点
         return jsonify({'total': len(data), 'rows': data[int(offset):(int(offset) + int(limit))]})
-@app.route('/shortcodes_table_no',methods=['GET','POST'])
+
+
+@app.route('/shortcodes_table_no', methods=['GET', 'POST'])
 def shortcodes_table_no():
     id = request.values['sel1']
     data = []
@@ -128,6 +136,7 @@ def shortcodes_table_no():
         offset = info.get('offset', 0)  # 分片数，(页码-1)*limit，它表示一段数据的起点
         return jsonify({'total': len(data), 'rows': data[int(offset):(int(offset) + int(limit))]})
 
+
 @app.route('/temperature', methods=['GET', 'POST'])
 def temperature():
     return render_template('temperature.html')
@@ -146,7 +155,9 @@ def strap():
 @app.route('/chain', methods=['GET', 'POST'])
 def chain():
     return render_template('chain.html')
-
+@app.route('/motor_current', methods=['GET', 'POST'])
+def motor_current():
+    return render_template('motor_current.html')
 
 @app.route('/database', methods=['GET', 'POST'])
 def database():
@@ -261,7 +272,7 @@ def t_warning():
     for i in database_data:
         d = {}
         d['id'] = i.id
-        d['time'] = i.time # 随机选取汉字并拼接
+        d['time'] = i.time  # 随机选取汉字并拼接
         d['device'] = i.device
         d['type'] = i.type
         d['warn_data'] = i.warn_data
@@ -287,7 +298,7 @@ def h_warning():
     for i in db_base:
         d = {}
         d['id'] = i.id
-        d['time'] = i.time # 随机选取汉字并拼接
+        d['time'] = i.time  # 随机选取汉字并拼接
         d['device'] = i.device
         d['type'] = i.type
         d['warn_data'] = i.warn_data
@@ -310,7 +321,7 @@ def n_warning():
     for i in db_base:
         d = {}
         d['id'] = i.id
-        d['time'] = i.time # 随机选取汉字并拼接
+        d['time'] = i.time  # 随机选取汉字并拼接
         d['device'] = i.device
         d['type'] = i.type
         d['warn_data'] = i.warn_data
@@ -333,7 +344,7 @@ def s_warning():
     for i in db_base:
         d = {}
         d['id'] = i.id
-        d['time'] = i.time # 随机选取汉字并拼接
+        d['time'] = i.time  # 随机选取汉字并拼接
         d['device'] = i.device
         d['type'] = i.type
         d['warn_data'] = i.warn_data
@@ -356,7 +367,7 @@ def c_warning():
     for i in db_base:
         d = {}
         d['id'] = i.id
-        d['time'] = i.time # 随机选取汉字并拼接
+        d['time'] = i.time  # 随机选取汉字并拼接
         d['device'] = i.device
         d['type'] = i.type
         d['warn_data'] = i.warn_data
@@ -438,6 +449,8 @@ def line_set():
     line.f_id = num
     db.session.commit()  # 提交数据库会话
     return redirect(url_for('device_settings'))  #
+
+
 @app.route('/echarts_tem', methods=['GET', 'POST'])
 def echarts_tem():
     data = {}
@@ -450,3 +463,105 @@ def echarts_tem():
     data['xtime'] = xtime
     data['yv'] = yv
     return jsonify(data)
+@app.route('/echarts_temp', methods=['GET', 'POST'])
+def echarts_temp():
+    data = {}
+    xtime = []
+    yv = []
+    names = Abient.query.all()
+    for i in names:
+        xtime.append(i.id)
+        yv.append(i.temperature)
+    data['xtime'] = xtime
+    data['yv'] = yv
+    return jsonify(data)
+@app.route('/echarts_h', methods=['GET', 'POST'])
+def echarts_h():
+    data = {}
+    xtime = []
+    yv = []
+    names =  Abient.query.all()
+    for i in names:
+        xtime.append(i.id)
+        yv.append(i.humidity)
+    data['xtime'] = xtime
+    data['yv'] = yv
+    return jsonify(data)
+@app.route('/echarts_t', methods=['GET', 'POST'])
+def echarts_t():
+    data = {}
+    xtime = []
+    yv = []
+    names = Noise.query.all()
+    for i in names:
+        xtime.append(i.id)
+        yv.append(i.amplitude)
+    data['xtime'] = xtime
+    data['yv'] = yv
+    return jsonify(data)
+@app.route('/echarts_ten', methods=['GET', 'POST'])
+def echarts_ten():
+    data = {}
+    xtime = []
+    yv = []
+    names = Belt.query.all()
+    print(names)
+    for o in names:
+        print(o)
+    for i in names:
+        xtime.append(i.id)
+        yv.append(i.tension)
+        print(i.tension)
+    data['xtime'] = xtime
+    data['yv'] = yv
+    return jsonify(data)
+@app.route('/echarts_c', methods=['GET', 'POST'])
+def echarts_c():
+    data = {}
+    xtime = []
+    yv = []
+    names = Chain.query.all()
+    for i in names:
+        xtime.append(i.id)
+        yv.append(i.tension)
+    data['xtime'] = xtime
+    data['yv'] = yv
+    return jsonify(data)
+@app.route('/echarts_m', methods=['GET', 'POST'])
+def echarts_m():
+    data = {}
+    xtime = []
+    yv = []
+    names = Motor_current.query.all()
+    for i in names:
+        xtime.append(i.id)
+        yv.append(i.A)
+    data['xtime'] = xtime
+    data['yv'] = yv
+    return jsonify(data)
+# 数据分析相关的页面
+@app.route('/data_analysis', methods=['GET', 'POST'])
+def data_analysis():
+    return render_template('data_analysis.html')
+@app.route('/user_manager',methods=['GET','POST'])
+def user_manager():
+    return render_template('user_manager.html')
+
+# 警告弹窗
+a = '0'
+@app.route('/tem_data',methods = ['GET','POST'])
+def tem_data():
+    global a
+    if request.method == 'POST':
+        data = request.json        # 获取 JOSN 数据
+        ti = data.get('time')
+        te = data.get('tem')
+        if te > 20:
+            a = '1'
+    return '1'
+@app.route('/error_tan',methods = ['GET','POST'])
+def error_tan():
+    global a
+    temp = a
+    a = '0'
+    return temp
