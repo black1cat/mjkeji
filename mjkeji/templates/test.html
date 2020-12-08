@@ -1,43 +1,684 @@
 {% extends 'base.html' %}
-{% block head%}
-<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
+{% block content %}
+            <div class="top-image" style="margin-top: 0%;">
+              <div class="container-fluid">
+                <form>
+                  <div class="form-group col-md-3">
+                    <label for="sel1">生产线</label>
+                    <select class="form-control" id="sel1" >
+                      
+                      <option>1</option>
+                
+                    </select>
+                  </div>
+                  <br>
+                  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<button class="btn btn-info" id="start">采集</button>
+                </form>
+              </div>
+              <div style='margin-top: 2%;'>
+                <ul class="nav nav-tabs" role="tablist">
+                  <li role="presentation" class="active"><a href="#temm" aria-controls="temm" role="tab" data-toggle="tab">机器温度</a></li>
+                  <li role="presentation"><a href="#en" aria-controls="en" role="tab" data-toggle="tab">环境状况</a></li>
+                  <li role="presentation"><a href="#no" aria-controls="profile" role="tab" data-toggle="tab">噪音情况</a></li>
+                  <li role="presentation"><a href="#stra" aria-controls="stra" role="tab" data-toggle="tab">皮带状况</a></li>
+                  <li role="presentation"><a href="#ch" aria-controls="settings" role="tab" data-toggle="tab">链条状况</a></li>
+                  <li role="presentation"><a href="#mo" aria-controls="settings" role="tab" data-toggle="tab">电机电流</a></li>
+                </ul>
+              </div>
+              <div class="left-image">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="tab-content">
+                        
+                          <div role="tabpanel" class="tab-pane active" id="temm">
+                            <div id="temperature" style="width: 600px;height:350px;"></div>
+                          </div>
+                          <div role="tabpanel" class="tab-pane" id="no">
+                            <div id="noise" style="width: 600px;height:350px;"></div>
+                          </div>
+                          <div role="tabpanel" class="tab-pane" id="en">
+                            <div class="col-md-6">
+                              <div id="temperature_h" style="width: 450px;height:350px;">sadasd</div>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="humidity" style="width: 450px;height:350px;">dasdasdas</div>
+                            </div>
+                          </div>
+                          <div role="tabpanel" class="tab-pane" id="stra">
+                            <div id="strap" style="width: 600px;height:350px;"></div>
+                          </div>
+                          <div role="tabpanel" class="tab-pane" id="ch">
+                            <div id="chain" style="width: 600px;height:350px;"></div>
+                          </div>
+                          <div role="tabpanel" class="tab-pane" id="mo">
+                            <div id="current" style="width: 600px;height:350px;"></div>
+                          </div>
+                      </div>  
+                    </div>
+                
+                  </div>
+                </div>
+              </div>
+              </div>
+{% endblock %}  
+{% block script %}
+<script src='static/assets/js/simple_page_table.js'></script>
+<script type="text/javascript">
+  var charts = [];
+  var myChart1 = echarts.init(document.getElementById('temperature'));
+  var myChart2 = echarts.init(document.getElementById('noise'));
+  var myChart3 = echarts.init(document.getElementById('temperature_h'));
+  var myChart4 = echarts.init(document.getElementById('humidity'));
+  var myChart5 = echarts.init(document.getElementById('strap'));
+  var myChart6 = echarts.init(document.getElementById('chain'));
+  var myChart7 = echarts.init(document.getElementById('current'));
+    var app ={
+      xdata:[],
+      yvalue:[]
+    };
+    var app_t ={
+      xdata_t:[],
+      yvalue_t:[]
+    };
+    var app_h ={
+      xdata_t:[],
+      yvalue_h:[]
+    };
+    $(document).ready(function(){
+      getData_tem();
+      getData_no();
+      getData_1();
+      getData_2();
+      getData_str();
+      getData_cha();
+      getData_mo();
+      console.log(app.xdata)
+      console.log(app.yvalue)
+    });
+    function getData_tem() {
+      $.ajax({
+        url:'echarts_tem',
+        data:{},
+        type:'POST',
+        async:false,
+        data:'json',
+        success:function(data){
+          app.xdata = data.xtime;
+          app.yvalue = data.yv;
+          myChart1.setOption({
+            title: {
+              text: '温度'
+            },
+            tooltip: {
+               trigger: 'axis'
+            },
+            legend: {
+              data:['温度','温度最低警示线','温度最高警示线']
+            },
+            xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: app.xdata,
+            },
+            yAxis: {
+              type:'value',
+              axisLabel:{
+                formatter:'{value}V'
+              },
+              min:0,
+              max:40,
+              splitLine:{
+                line:3,
+                lineStyle:{
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-{% endblock %}
-{% block content %}   
-{% endblock %}
-{% block script%}
-<!-- <script>
-  function sendRequest(){
-  $.ajax({
-    url: "error_tan",                            //ajax跳转的action
-    type:"get",   //提交类型     
-    success:function(data){    //对应返回值得处理一般根据具体情况来定，最好的处理方式时，在页面调断点看返回值得结构，如下图 
-      if(data == '1'){
-        swal({
-        title: "温度警告",
-        text: "机器温度过高",
-        type: "error",
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "解决",
-        closeOnConfirm: false
-    }, function() {
-        swal("温度正常", "问题已经解决","success")
-    })
-
-      }
-    },
-
-    error:function(){
-      alert("ajax请求失败！");
+                  color:['#aaa', '#ddd']
+                }
+              },
+            },
+            series: [{
+              name: '温度',
+              type: 'line',
+              data: app.yvalue,
+              smooth:true,
+              markLine: {
+                // animation = true,
+                data : [{
+                
+                silent:true,             //鼠标悬停事件  true没有，false有
+                    label:{
+                    position:'end', //end对应的值显示在警戒线的后面，start显示在前面（y轴上）
+                    formatter:"低温预警"  //和y轴对应的数值
+                },
+                yAxis:5         // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
+               
+            },
+            {
+                
+                silent:true,             //鼠标悬停事件  true没有，false有
+                    label:{
+                    position:'end', //end对应的值显示在警戒线的后面，start显示在前面（y轴上）
+                    formatter:"高温预警"  //和y轴对应的数值
+                },
+                yAxis:35         // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
+               
+            },
+            ]
+            },
+              itemStyle : {  
+                            
+            },
+              areaStyle: {}
+           }
+          ]
+          })
+        },
+        error:function (msg) {
+                alert(msg)
+                console.log(msg);
+                alert('系统发生错误');
+            }
+      })
     }
-  });
+    function getData_no() {
+      $.ajax({
+        url:'echarts_t',
+        data:{},
+        type:'POST',
+        async:false,
+        data:'json',
+        success:function(data){
+          app.xdata = data.xtime;
+          app.yvalue = data.yv;
+          myChart2.setOption({
+            title: {
+              text: '频率'
+            },
+            tooltip: {},
+            legend: {
+              data:['频率']
+            },
+            xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: app.xdata
+            },
+            yAxis: {
+              type:'value',
+              axisLabel:{
+                formatter:'{value}HZ'
+              },
+              min:0,
+              max:3000,
+              splitLine:{
+                line:3,
+                lineStyle:{
 
-}
+                  color:['#aaa', '#ddd']
+                }
+              },
+            },
+            series: [{
+              name: '频率',
+              type: 'line',
+              data: app.yvalue,
+              smooth:true,
+              markLine: {
+                // animation = true,
+                data : [{
+                
+                silent:true,             //鼠标悬停事件  true没有，false有
+                    label:{
+                    position:'end', //end对应的值显示在警戒线的后面，start显示在前面（y轴上）
+                    formatter:"低温预警"  //和y轴对应的数值
+                },
+                yAxis:1000         // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
+               
+            },
+            {
+                
+                silent:true,             //鼠标悬停事件  true没有，false有
+                    label:{
+                    position:'end', //end对应的值显示在警戒线的后面，start显示在前面（y轴上）
+                    formatter:"高温预警"  //和y轴对应的数值
+                },
+                yAxis:2700         // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
+               
+            },
+            ]
+            },
+              itemStyle : {  
+                            
+            },
+              areaStyle: {}
+            }]
+          })
+        },
+        error:function (msg) {
+                alert(msg)
+                console.log(msg);
+                alert('系统发生错误');
+            }
+      })
+    }
+    function getData_1() {
+      $.ajax({
+        url:'echarts_temp',
+        data:{},
+        type:'POST',
+        async:false,
+        data:'json',
+        success:function(data){
+          app_t.xdata_t = data.xtime;
+          app_t.yvalue_t = data.yv;
+          myChart3.setOption({
+            title: {
+              text: '温度'
+            },
+            tooltip: {},
+            legend: {
+              data:['温度']
+            },
+            xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: app_t.xdata_t
+            },
+            yAxis: {
+              type:'value',
+              axisLabel:{
+                formatter:'{value}℃'
+              },
+              min:0,
+              max:40,
+              splitLine:{
+                line:3,
+                lineStyle:{
 
-$(function () {       //加载页面的时候就会调用定时刷新
-  setInterval("sendRequest()", 1000);      //每隔1秒刷新点击量 
-});
-</script> -->
+                  color:['#aaa', '#ddd']
+                }
+              },
+            },
+            series: [{
+              name: '温度',
+              type: 'line',
+              data: app_t.yvalue_t,
+              smooth:true,
+              markLine: {
+                // animation = true,
+                data : [{
+                
+                silent:true,             //鼠标悬停事件  true没有，false有
+                    label:{
+                    position:'end', //end对应的值显示在警戒线的后面，start显示在前面（y轴上）
+                    formatter:"低温预警"  //和y轴对应的数值
+                },
+                yAxis:5         // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
+               
+            },
+            {
+                
+                silent:true,             //鼠标悬停事件  true没有，false有
+                    label:{
+                    position:'end', //end对应的值显示在警戒线的后面，start显示在前面（y轴上）
+                    formatter:"高温预警"  //和y轴对应的数值
+                },
+                yAxis:35         // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
+               
+            },
+            ]
+            },
+            areaStyle: {}
+            }]
+          })
+        },
+        error:function (msg) {
+                alert(msg)
+                console.log(msg);
+                alert('系统发生错误');
+            }
+      })
+    }
+    function getData_2() {
+      $.ajax({
+        url:'echarts_h',
+        data:{},
+        type:'POST',
+        async:false,
+        data:'json',
+        success:function(data){
+          app_h.xdata_t = data.xtime;
+          app_h.yvalue_h = data.yv;
+          myChart4.setOption({
+            title: {
+              text: '湿度'
+            },
+            tooltip: {},
+            legend: {
+              data:['湿度']
+            },
+            xAxis: {
+              data: app_h.xdata_t,
+              type: 'category',
+              boundaryGap: false,
+            },
+            yAxis: {
+              type:'value',
+              axisLabel:{
+                formatter:'{value}%'
+              },
+              min:0,
+              max:20,
+              splitLine:{
+                line:3,
+                lineStyle:{
 
+                  color:['#aaa', '#ddd']
+                }
+              },
+            },
+            series: [{
+              name: '湿度',
+              type: 'line',
+              data: app_h.yvalue_h,
+              smooth:true,
+              markLine: {
+                // animation = true,
+                data : [{
+                
+                silent:true,             //鼠标悬停事件  true没有，false有
+                    label:{
+                    position:'end', //end对应的值显示在警戒线的后面，start显示在前面（y轴上）
+                    formatter:"低湿预警"  //和y轴对应的数值
+                },
+                yAxis:5         // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
+               
+            },
+            {
+                
+                silent:true,             //鼠标悬停事件  true没有，false有
+                    label:{
+                    position:'end', //end对应的值显示在警戒线的后面，start显示在前面（y轴上）
+                    formatter:"高湿预警"  //和y轴对应的数值
+                },
+                yAxis:18         // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
+               
+            },
+            ]
+            },
+            areaStyle: {}
+            }]
+          })
+        },
+        error:function (msg) {
+                alert(msg)
+                console.log(msg);
+                alert('系统发生错误');
+            }
+      })
+    }
+    function getData_str() {
+      $.ajax({
+        url:'echarts_ten',
+        data:{},
+        type:'POST',
+        async:false,
+        data:'json',
+        success:function(data){
+          app.xdata = data.xtime;
+          app.yvalue = data.yv;
+          myChart5.setOption({
+            title: {
+              text: '频率'
+            },
+            tooltip: {},
+            legend: {
+              data:['频率']
+            },
+            xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: app.xdata
+              
+            },
+            yAxis: {
+              type:'value',
+              axisLabel:{
+                formatter:'{value}HZ'
+              },
+              min:0,
+              max:60,
+              splitLine:{
+                line:3,
+                lineStyle:{
+
+                  color:['#aaa', '#ddd']
+                }
+              },
+            },
+            series: [{
+              name: '频率',
+              type: 'line',
+              data: app.yvalue,
+              smooth:true,
+              markLine: {
+                // animation = true,
+                data : [{
+                
+                silent:true,             //鼠标悬停事件  true没有，false有
+                    label:{
+                    position:'end', //end对应的值显示在警戒线的后面，start显示在前面（y轴上）
+                    formatter:"低温预警"  //和y轴对应的数值
+                },
+                yAxis:20         // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
+               
+            },
+            {
+                
+                silent:true,             //鼠标悬停事件  true没有，false有
+                    label:{
+                    position:'end', //end对应的值显示在警戒线的后面，start显示在前面（y轴上）
+                    formatter:"高温预警"  //和y轴对应的数值
+                },
+                yAxis:47         // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
+               
+            },
+            ]
+            },
+              itemStyle : {  
+                            
+            },
+              areaStyle: {}
+            }]
+          })
+        },
+        error:function (msg) {
+                alert(msg)
+                console.log(msg);
+                alert('系统发生错误');
+            }
+      })
+    } 
+    function getData_cha() {
+      $.ajax({
+        url:'echarts_c',
+        data:{},
+        type:'POST',
+        async:false,
+        data:'json',
+        success:function(data){
+          app.xdata = data.xtime;
+          app.yvalue = data.yv;
+          myChart6.setOption({
+            title: {
+              text: '频率'
+            },
+            tooltip: {},
+            legend: {
+              data:['频率']
+            },
+            xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: app.xdata
+            },
+            yAxis: {
+              type:'value',
+              axisLabel:{
+                formatter:'{value}HZ'
+              },
+              min:0,
+              max:60,
+              splitLine:{
+                line:3,
+                lineStyle:{
+
+                  color:['#aaa', '#ddd']
+                }
+              },
+            },
+            series: [{
+              name: '频率',
+              type: 'line',
+              data: app.yvalue,
+              smooth:true,
+              markLine: {
+                // animation = true,
+                data : [{
+                
+                silent:true,             //鼠标悬停事件  true没有，false有
+                    label:{
+                    position:'end', //end对应的值显示在警戒线的后面，start显示在前面（y轴上）
+                    formatter:"低温预警"  //和y轴对应的数值
+                },
+                yAxis:5         // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
+               
+            },
+            {
+                
+                silent:true,             //鼠标悬停事件  true没有，false有
+                    label:{
+                    position:'end', //end对应的值显示在警戒线的后面，start显示在前面（y轴上）
+                    formatter:"高温预警"  //和y轴对应的数值
+                },
+                yAxis:35         // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
+               
+            },
+            ]
+            },
+              itemStyle : {  
+                            
+            },
+              areaStyle: {}
+            }]
+          })
+        },
+        error:function (msg) {
+                alert(msg)
+                console.log(msg);
+                alert('系统发生错误');
+            }
+      })
+    }
+    function getData_mo() {
+      $.ajax({
+        url:'echarts_m',
+        data:{},
+        type:'POST',
+        async:false,
+        data:'json',
+        success:function(data){
+          app.xdata = data.xtime;
+          app.yvalue = data.yv;
+          myChart7.setOption({
+            title: {
+              text: '电流'
+            },
+            tooltip: {},
+            legend: {
+              data:['电流']
+            },
+            xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: app.xdata
+            },
+            yAxis: {
+              type:'value',
+              axisLabel:{
+                formatter:'{value}V'
+              },
+              min:0,
+              max:25,
+              splitLine:{
+                line:3,
+                lineStyle:{
+
+                  color:['#aaa', '#ddd']
+                }
+              },
+            },
+            series: [{
+              name: '电流',
+              type: 'line',
+              data: app.yvalue,
+              smooth:true,
+              markLine: {
+                // animation = true,
+                data : [{
+                
+                silent:true,             //鼠标悬停事件  true没有，false有
+                    label:{
+                    position:'end', //end对应的值显示在警戒线的后面，start显示在前面（y轴上）
+                    formatter:"低温预警"  //和y轴对应的数值
+                },
+                yAxis:8         // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
+               
+            },
+            {
+                
+                silent:true,             //鼠标悬停事件  true没有，false有
+                    label:{
+                    position:'end', //end对应的值显示在警戒线的后面，start显示在前面（y轴上）
+                    formatter:"高温预警"  //和y轴对应的数值
+                },
+                yAxis:18         // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
+               
+            },
+            ]
+            },
+              itemStyle : {  
+                            
+            },
+              areaStyle: {}
+            }]
+          })
+        },
+        error:function (msg) {
+                alert(msg)
+                console.log(msg);
+                alert('系统发生错误');
+            }
+      })
+    }
+
+    charts.push(myChart1);
+    charts.push(myChart2);
+    charts.push(myChart3);
+    charts.push(myChart4);
+    charts.push(myChart5);
+    charts.push(myChart6);
+    charts.push(myChart7)
+    $(window).resize(function() {
+ for(var i = 0; i < charts.length; i++) {
+ charts[i].resize();
+ }
+ });
+ //解决tab切换不显示问题 在加载窗口后重新渲染。
+ $('a[data-toggle="pill"]').on('shown.bs.tab', function(e) {
+ for(var i = 0; i < charts.length; i++) {
+ charts[i].resize();
+ }
+ });
+</script>
 {% endblock %}

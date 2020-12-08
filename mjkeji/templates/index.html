@@ -16,25 +16,45 @@
                 </form>
               </div>
               <div style='margin-top: 2%;'>
-                <ul class="nav nav-pills">
-                  <li role="presentation" class="active"><a href="index">机器温度</a></li>
-                  <li role="presentation"><a href="temperature">环境状况</a></li>
-                  <li role="presentation"><a href="noise">噪声情况</a></li>
-                  <li role="presentation"><a href="strap">皮带情况</a></li>
-                  <li role="presentation"><a href="chain">链条情况</a></li>
-                  <li role="presentation"><a href="motor_current">电机电流</a></li>
+                <ul class="nav nav-tabs" role="tablist">
+                  <li role="presentation" class="active"><a href="#temm" aria-controls="temm" role="tab" data-toggle="tab">机器温度</a></li>
+                  <li role="presentation"><a href="#en" aria-controls="en" role="tab" data-toggle="tab">环境状况</a></li>
+                  <li role="presentation"><a href="#no" aria-controls="profile" role="tab" data-toggle="tab">噪音情况</a></li>
+                  <li role="presentation"><a href="#stra" aria-controls="stra" role="tab" data-toggle="tab">皮带状况</a></li>
+                  <li role="presentation"><a href="#ch" aria-controls="settings" role="tab" data-toggle="tab">链条状况</a></li>
+                  <li role="presentation"><a href="#mo" aria-controls="settings" role="tab" data-toggle="tab">电机电流</a></li>
                 </ul>
               </div>
               <div class="left-image">
                 <div class="container-fluid">
                   <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                       <div class="tab-content">
-                       
-                       
-                        <div id="temperature" style="width: 600px;height:350px;"></div>
-                      </div>
-                      
+                        
+                          <div role="tabpanel" class="tab-pane active" id="temm">
+                            <div id="temperature" style="width: 600px;height:350px;"></div>
+                          </div>
+                          <div role="tabpanel" class="tab-pane" id="no">
+                            <div id="noise" style="width: 600px;height:350px;"></div>
+                          </div>
+                          <div role="tabpanel" class="tab-pane" id="en">
+                            <div class="col-md-6">
+                              <div id="temperature_h" style="width: 450px;height:350px;">sadasd</div>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="humidity" style="width: 450px;height:350px;">dasdasdas</div>
+                            </div>
+                          </div>
+                          <div role="tabpanel" class="tab-pane" id="stra">
+                            <div id="strap" style="width: 600px;height:350px;"></div>
+                          </div>
+                          <div role="tabpanel" class="tab-pane" id="ch">
+                            <div id="chain" style="width: 600px;height:350px;"></div>
+                          </div>
+                          <div role="tabpanel" class="tab-pane" id="mo">
+                            <div id="current" style="width: 600px;height:350px;"></div>
+                          </div>
+                      </div>  
                     </div>
                 
                   </div>
@@ -43,127 +63,6 @@
               </div>
 {% endblock %}  
 {% block script %}
-<script src='static/assets/js/simple_page_table.js'></script>
-<script type="text/javascript">
-  // 基于准备好的dom，初始化echarts实例
-  // var myChart = echarts.init(document.getElementById('temperature'));
-
-  // // 指定图表的配置项和数据
-  // var option1 = {
-  //   title: {
-  //     text: '温度'
-  //   },
-  //   tooltip: {},
-  //   legend: {
-  //     data:['温度']
-  //   },
-  //   xAxis: {
-  //     data: ["0时","3时","6时","9时","12时","15时","18时","21时","24时"]
-  //   },
-  //   yAxis: {},
-  //   series: [{
-  //     name: '温度',
-  //     type: 'line',
-  //     data: [5, 20, 36, 10, 10, 20,24,3,56]
-  //   }]
-  // };
-  // // 使用刚指定的配置项和数据显示图表。
-  // myChart.setOption(option1);
-  var myChart = echarts.init(document.getElementById('temperature'));
-    var app ={
-      xdata:[],
-      yvalue:[]
-    };
-    $(document).ready(function(){
-      getData();
-      console.log(app.xdata)
-      console.log(app.yvalue)
-    });
-    setInterval(getDate,10);
-    function getData() {
-      $.ajax({
-        url:'echarts_tem',
-        data:{},
-        type:'POST',
-        async:false,
-        data:'json',
-        success:function(data){
-          app.xdata = data.xtime;
-          app.yvalue = data.yv;
-          myChart.setOption({
-            title: {
-              text: '温度'
-            },
-            tooltip: {
-               trigger: 'axis'
-            },
-            legend: {
-              data:['温度','温度最低警示线','温度最高警示线']
-            },
-            xAxis: {
-              type: 'category',
-              boundaryGap: false,
-              data: app.xdata,
-            },
-            yAxis: {
-              type:'value',
-              axisLabel:{
-                formatter:'{value}V'
-              },
-              min:0,
-              max:40,
-              splitLine:{
-                line:3,
-                lineStyle:{
-
-                  color:['#aaa', '#ddd']
-                }
-              },
-            },
-            series: [{
-              name: '温度',
-              type: 'line',
-              data: app.yvalue,
-              smooth:true,
-              markLine: {
-                // animation = true,
-                data : [{
-                
-                silent:true,             //鼠标悬停事件  true没有，false有
-                    label:{
-                    position:'end', //end对应的值显示在警戒线的后面，start显示在前面（y轴上）
-                    formatter:"低温预警"  //和y轴对应的数值
-                },
-                yAxis:5         // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
-               
-            },
-            {
-                
-                silent:true,             //鼠标悬停事件  true没有，false有
-                    label:{
-                    position:'end', //end对应的值显示在警戒线的后面，start显示在前面（y轴上）
-                    formatter:"高温预警"  //和y轴对应的数值
-                },
-                yAxis:35         // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
-               
-            },
-            ]
-            },
-              itemStyle : {  
-                            
-            },
-              areaStyle: {}
-           }
-          ]
-          })
-        },
-        error:function (msg) {
-                alert(msg)
-                console.log(msg);
-                alert('系统发生错误');
-            }
-      })
-    }
-
-</script>
+<!-- <script src='static/assets/js/simple_page_table.js'></script> -->
+<script src='static/assets/js/index_echarts.js'></script>
 {% endblock %}

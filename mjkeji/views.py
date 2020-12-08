@@ -4,6 +4,7 @@ from mjkeji import app, db, login_manager
 from flask import render_template, request, url_for, redirect, flash, jsonify
 from flask_login import login_user
 from random import choice
+import pandas as pd
 # 测试页面
 @app.route('/test', methods=['GET', 'POST'])
 def test():
@@ -511,7 +512,6 @@ def echarts_ten():
     for i in names:
         xtime.append(i.id)
         yv.append(i.tension)
-        print(i.tension)
     data['xtime'] = xtime
     data['yv'] = yv
     return jsonify(data)
@@ -556,7 +556,9 @@ def tem_data():
         data = request.json        # 获取 JOSN 数据
         ti = data.get('time')
         te = data.get('tem')
-        if te > 20:
+        dataframe = pd.DataFrame({'温度':te,'时刻':ti})
+        dataframe.to_csv("test.csv",mode='a',index=False,header=False,encoding="utf_8")
+        if te[0] > 20:
             a = '1'
     return '1'
 @app.route('/error_tan',methods = ['GET','POST'])
