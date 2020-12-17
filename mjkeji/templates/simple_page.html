@@ -21,6 +21,8 @@
                         <div class="col-md-12">
                           <h1>异常概览</h1>
                         </div>
+                        <button  class="btn btn-success btn-sm" onclick="click_()" data-toggle="modal" data-target="#xampleModal">打开警告弹窗</button>
+                        <br>
                       </div>
                     </div>
                   </div>
@@ -162,8 +164,8 @@
     
     }
     
-    $(function () {       //加载页面的时候就会调用定时刷新
+    function click_() {       //加载页面的时候就会调用定时刷新
       setInterval("sendRequest()", 1000);      //每隔1秒刷新点击量 
-    });
+    }
     </script>
     {% endblock %}

@@ -127,7 +127,9 @@ var charts = [];
             title: {
               text: '频率'
             },
-            tooltip: {},
+            tooltip: {
+              trigger: 'axis'
+            },
             legend: {
               data:['频率']
             },
@@ -208,7 +210,9 @@ var charts = [];
             title: {
               text: '温度'
             },
-            tooltip: {},
+            tooltip: {
+              trigger: 'axis'
+            },
             legend: {
               data:['温度']
             },
@@ -286,7 +290,9 @@ var charts = [];
             title: {
               text: '湿度'
             },
-            tooltip: {},
+            tooltip: {
+              trigger: 'axis'
+            },
             legend: {
               data:['湿度']
             },
@@ -364,7 +370,9 @@ var charts = [];
             title: {
               text: '频率'
             },
-            tooltip: {},
+            tooltip: {
+              trigger: 'axis'
+            },
             legend: {
               data:['频率']
             },
@@ -446,7 +454,9 @@ var charts = [];
             title: {
               text: '频率'
             },
-            tooltip: {},
+            tooltip: {
+              trigger: 'axis'
+            },
             legend: {
               data:['频率']
             },
@@ -527,7 +537,9 @@ var charts = [];
             title: {
               text: '电流'
             },
-            tooltip: {},
+            tooltip: {
+              trigger: 'axis'
+            },
             legend: {
               data:['电流']
             },

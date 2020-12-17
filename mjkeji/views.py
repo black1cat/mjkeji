@@ -1,10 +1,12 @@
 
+from typing import get_type_hints
 from mjkeji.model import Abient, Belt, Chain, Cwarning, Device, Hwarning, Machine_temperature, Motor_current, Noise, Nwarning, Swarning, Twarning, User, Product_line, Factory_area, Device, Warning
 from mjkeji import app, db, login_manager
 from flask import render_template, request, url_for, redirect, flash, jsonify
 from flask_login import login_user
 from random import choice
 import pandas as pd
+from flask_login import login_required, logout_user
 # 测试页面
 @app.route('/test', methods=['GET', 'POST'])
 def test():
@@ -37,10 +39,18 @@ def login():
             return redirect(url_for('index'))  #       flash('账号或密码错误')  # 如果验证失败，显示错误消息
         return redirect(url_for('login'))  # 重定向回登录页面
     return render_template('login_2.html')
+@app.route('/logout')
+@login_required  # 用于视图保护，后面会详细介绍
+def logout():
+    logout_user()  # 登出用户
+    flash('Goodbye.')
+    return redirect(url_for('login'))  # 重定向回首页
 #
 @app.route('/index', methods=['GET', 'POST'])
+@login_required
 def index():
     data = Product_line.query.all()
+    a = 3
     return render_template('index.html', data=data)
 
 
@@ -463,6 +473,7 @@ def echarts_tem():
         yv.append(i.temperature)
     data['xtime'] = xtime
     data['yv'] = yv
+    print(data)
     return jsonify(data)
 @app.route('/echarts_temp', methods=['GET', 'POST'])
 def echarts_temp():
@@ -549,6 +560,31 @@ def user_manager():
 
 # 警告弹窗
 a = '0'
+@app.route('/sensor_data',methods = ['GET','POST'])
+def sensor_data():
+    global a
+    status = 0
+    msg = 'no problem'
+    re_data = {}
+    if request.method == 'POST':
+        data = request.json
+        p_id = data.get('proLineId')
+        d_id = data.get('deviceId')
+        s_id = data.get('sensorId')
+        time = data.get('time')
+        count = data.get('count')
+        valueBuf = data.get('valueBuf')
+        speedBuf = data.get('speed')
+        # dataframe = pd.DataFrame({'生产线编号':p_id,'设备编号':d_id,'传感器编号':s_id,'时刻':[speedBuf]},index=[0])
+        for i in valueBuf:
+            if i>20:
+                a = '1'
+                status = 3
+        re_data['status'] = status
+        re_data['msg'] = msg
+        # dataframe.to_csv("data.csv",mode='a',index=False,encoding="utf_8_sig")
+        print(time)    
+    return jsonify(re_data)
 @app.route('/tem_data',methods = ['GET','POST'])
 def tem_data():
     global a
@@ -556,10 +592,11 @@ def tem_data():
         data = request.json        # 获取 JOSN 数据
         ti = data.get('time')
         te = data.get('tem')
-        dataframe = pd.DataFrame({'温度':te,'时刻':ti})
-        dataframe.to_csv("test.csv",mode='a',index=False,header=False,encoding="utf_8")
-        if te[0] > 20:
+        # dataframe = pd.DataFrame({'温度':te,'时刻':ti})
+        # dataframe.to_csv("test.csv",mode='a',index=False,header=False,encoding="utf_8")
+        if te > 20:
             a = '1'
+        
     return '1'
 @app.route('/error_tan',methods = ['GET','POST'])
 def error_tan():

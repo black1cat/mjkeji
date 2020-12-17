@@ -2,6 +2,7 @@
 {% block content %}
             <div class="top-image" style="margin-top: 0%;">
               <div class="container-fluid">
+                {% if current_user.is_authenticated %}
                 <form>
                   <div class="form-group col-md-3">
                     <label for="sel1">生产线</label>
@@ -14,6 +15,7 @@
                   <br>
                   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<button class="btn btn-info" id="start">采集</button>
                 </form>
+                {% endif %}
               </div>
               <div style='margin-top: 2%;'>
                 <ul class="nav nav-tabs" role="tablist">
